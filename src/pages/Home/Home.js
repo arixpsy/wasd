@@ -10,6 +10,7 @@ const GridContainer = styled.div`
   grid-template-rows: auto 1fr auto;
   min-height: calc(100vh - calc(2 * var(--default-padding)));
   gap: 2rem;
+  width: 100%;
 `
 
 const Home = () => {
