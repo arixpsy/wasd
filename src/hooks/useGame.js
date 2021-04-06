@@ -2,10 +2,6 @@ import { useState } from 'react'
 import _ from 'lodash'
 
 const GENERATE_COUNT = 10
-const INPUT_TYPE = Object.freeze({
-  ARROW: 'arrow',
-  LETTER: 'letter'
-})
 const INPUTS = Object.freeze({
   ARROW: ['up', 'down', 'left', 'right'],
   LETTER: ['w', 'a', 's', 'd']

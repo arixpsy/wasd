@@ -19,10 +19,10 @@
 body {
   --color-text-main: #4d4d4d;
   --color-background-main: #ffffff;
-  --color-primary: red;
-  --color-secondary: blue;
-  --color-tertiary: green;
-  --color-quaternary: yellow;
+  --color-primary: #e58b88;
+  --color-secondary: #9dabdd;
+  --color-tertiary: #70ae98;
+  --color-quaternary: #ecbe7a;
 }
 
 body.dark {
