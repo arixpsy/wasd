@@ -1,13 +1,50 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+* {
+  font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  min-height: 100vh;
+  --default-padding: 2.5rem;
+  --default-grid-gap: 0.5rem;
+}
+body {
+  --color-text-main: #4d4d4d;
+  --color-background-main: #ffffff;
+  --color-primary: red;
+  --color-secondary: blue;
+  --color-tertiary: green;
+  --color-quaternary: yellow;
+}
+
+body.dark {
+  --color-text-main: #ffffff;
+  --color-background-main: #4d4d4d;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    --color-text-main: #ffffff;
+    --color-background-main: #4d4d4d;
+  }
+  body.light {
+    --color-text-main: #4d4d4d;
+    --color-background-main: #ffffff;
+  }
+}
+
+body {
+  background: var(--color-background-main);
+}
+
+h1,p {
+  color: var(--color-text-main);
 }
