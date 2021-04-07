@@ -23,7 +23,7 @@ const Circle = styled.div`
   color: var(--color-background-main);
   text-transform: capitalize;
   font-weight: bold;
-  transition: transform ease-in-out 0.25s;
+  transition: transform ease 0.25s;
 `
 
 const Cell = ({ character, left }) => {
