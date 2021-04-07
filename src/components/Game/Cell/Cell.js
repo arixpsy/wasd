@@ -17,60 +17,28 @@ const Circle = styled.div`
   font-size: 3rem;
   position: absolute;
   left: ${props => (
-    props.isLeft ? '70%' : 'calc(30% - 100px)'
+    props.left ? '70%' : 'calc(30% - 100px)'
   )};
   top: calc(50% - 50px);
   color: var(--color-background-main);
   text-transform: capitalize;
   font-weight: bold;
+  transition: transform ease-in-out 0.25s;
 `
 
-const Cell = ({ character, isLeft }) => {
+const Cell = ({ character, left }) => {
   return (
-    <Circle character={character} isLeft={isLeft}>{ 
+    <>
+    <Circle character={character} left={left}>{ 
       character === 'up' ? <ImArrowUp /> : 
       character === 'down' ? <ImArrowDown /> : 
       character === 'left' ? <ImArrowLeft /> : 
       character === 'right' ? <ImArrowRight /> : 
       character
     }</Circle>
+    {left}
+    </>
   )
 }
 
 export default Cell
-
-// div > * &:nth-child(2){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(3){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(4){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(5){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(6){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(7){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(8){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(9){
-//   transform: translateX(120px)
-// }
-
-// div > * &:nth-child(10){
-//   transform: translateX(120px)
-// }
