@@ -6,7 +6,7 @@ import ProgressBar from './ProgressBar/ProgressBar'
 
 const Console = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto auto;
   width: 100%;
   justify-items: center;
 `
@@ -59,15 +59,15 @@ const StopWatch = styled.div`
   color: var(--color-text-main);
 `
 const Game = () => {
-  const { sequence, generateSequence, insertInput, stopWatch } = useGame()
+  const { sequence, generateSequence, insertInput, stopWatch, resetGame, progress } = useGame()
   useEffect(() => {
     generateSequence()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleUserKeyPress = (event) => {
+  const handleUserKeyPress = useCallback((event) => {
     insertInput(event.keyCode)
-  }
+  },[insertInput])
 
   useEffect(() => {
     window.addEventListener('keydown', handleUserKeyPress);
@@ -83,15 +83,16 @@ const Game = () => {
         { stopWatch.time.toFixed(2) }
       </StopWatch>
       <ViewSplittor>
-        <LeftView left={true}>
+        <LeftView>
           {sequence.letter.get.map(item => <Cell key={item.key} character={item.input} left={true} />)}
         </LeftView>
         <VerticalBorder />
-        <RightView left={false}>
+        <RightView>
           {sequence.arrow.get.map(item => <Cell key={item.key} character={item.input} left={false} />)}
         </RightView>
       </ViewSplittor>
-      <ProgressBar />
+      <button onClick={resetGame}>reset</button>
+      <ProgressBar progress={progress}/>
     </Console>
   )
 }

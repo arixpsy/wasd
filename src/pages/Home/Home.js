@@ -4,6 +4,7 @@ import PageContainer from './../../components/common/PageContainer/PageContainer
 import PageFooter from './../../components/common/PageFooter/PageFooter'
 import Game from './../../components/Game/Game'
 import { FaArrowsAlt } from 'react-icons/fa'
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
