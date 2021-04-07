@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PageContainer from './../../components/common/PageContainer/PageContainer'
 import PageFooter from './../../components/common/PageFooter/PageFooter'
 import Game from './../../components/Game/Game'
-
+import { FaArrowsAlt } from 'react-icons/fa'
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <PageContainer>
       <GridContainer>
-        <h1>WASD</h1>
+        <h1><FaArrowsAlt /> WASD</h1>
         <Game />
         <PageFooter />
       </GridContainer>
