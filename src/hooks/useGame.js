@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import useStopWatch from './useStopWatch'
 import _ from 'lodash'
 
-const GENERATE_COUNT = 20
-
 const INPUTS = Object.freeze({
   ARROW: ['up', 'down', 'left', 'right'],
   LETTER: ['w', 'a', 's', 'd']
@@ -21,17 +19,18 @@ const VALID_KEYS = {
 }
 
 const useGame = () => {
+  const [generateCount, setGenerateCount] = useState(20)
   const [letterSequence, setLetterSequence] = useState([])
   const [arrowSequence, setArrowSequence] = useState([])
   const { elapsedTime, startStopWatch, stopStopWatch, resetStopWatch} = useStopWatch()
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState({ arrow: 0, letter: 0 })
   // const [gameState, setGameState] = useState('create')
 
   // Generate new sequence 
   const generateSequence = () => {
     let sequenceArrow = []
     let sequenceLetter = []
-    for (let i = 0; i < GENERATE_COUNT; i++) {
+    for (let i = 0; i < generateCount; i++) {
       sequenceArrow.push({key: `arrow${i}`, input: INPUTS.ARROW[_.random(3)]})
       sequenceLetter.push({key: `letter${i}`, input: INPUTS.LETTER[_.random(3)]})
     }
@@ -67,14 +66,20 @@ const useGame = () => {
 
   // Handle reset game
   const resetGame = () => {
+    stopStopWatch()
     resetStopWatch()
     generateSequence()
   }
 
   // Update game progress on successful key input
   useEffect(()=> {
-
-  },[letterSequence, arrowSequence, setProgress])
+    const arrowCount = arrowSequence.length
+    const letterCount = letterSequence.length
+    setProgress({
+      arrow: (generateCount - arrowCount) / generateCount,
+      letter: (generateCount - letterCount) / generateCount
+    })
+  },[letterSequence, arrowSequence, setProgress, generateCount])
 
   return {
     resetGame: () => resetGame(),
@@ -83,6 +88,7 @@ const useGame = () => {
       letters: letterSequence,
       arrows: arrowSequence
     },
+    changeGenerateCount: (number) => setGenerateCount(number),
     insertInput: (keyCode) => gameButtonPress(keyCode),
     progress,
     stopWatch: {
