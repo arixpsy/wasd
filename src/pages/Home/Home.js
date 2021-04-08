@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import PageContainer from './../../components/common/PageContainer/PageContainer'
 import PageFooter from './../../components/common/PageFooter/PageFooter'
+import PageHeader from './../../components/common/PageHeader/PageHeader'
 import Game from './../../components/Game/Game'
-import { FaArrowsAlt } from 'react-icons/fa'
+
 
 const GridContainer = styled.div`
   display: grid;
@@ -18,7 +19,7 @@ const Home = () => {
   return (
     <PageContainer>
       <GridContainer>
-        <h1><FaArrowsAlt /> WASD</h1>
+        <PageHeader />
         <Game />
         <PageFooter />
       </GridContainer>
