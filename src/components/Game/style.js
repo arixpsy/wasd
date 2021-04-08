@@ -54,3 +54,24 @@ export const StopWatch = styled.div`
   font-size: 5rem;
   color: var(--color-text-main);
 `
+
+export const ResetButton = styled.button`
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.2rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.75rem;
+  color: var(--color-text-main);
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  transition: all ease 0.2s;
+  
+  &:hover , &:focus {
+    background: var(--color-text-main);
+    color: var(--color-background-main);
+    filter: brightness(2.5);
+  }
+`

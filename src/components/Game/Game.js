@@ -2,7 +2,8 @@ import React, { useEffect, useCallback } from 'react'
 import useGame from './../../hooks/useGame'
 import Cell from './Cell/Cell'
 import ProgressBar from './ProgressBar/ProgressBar'
-import { Console, StopWatch, ViewSplittor, LeftView, RightView, VerticalBorder } from './style'
+import { Console, StopWatch, ViewSplittor, LeftView, RightView, VerticalBorder, ResetButton } from './style'
+import { BsArrowRepeat } from 'react-icons/bs'
 
 const Game = () => {
   const { 
@@ -44,7 +45,7 @@ const Game = () => {
           {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
         </RightView>
       </ViewSplittor>
-      <button onClick={resetGame}>reset</button>
+      <ResetButton onClick={resetGame}><BsArrowRepeat /></ResetButton>
       <ProgressBar progress={progress}/>
     </Console>
   )
