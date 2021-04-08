@@ -21,6 +21,16 @@ const Text = styled.p`
   grid-template-columns: repeat(3, max-content);
   place-items: center;
   gap: var(--default-grid-gap);
+
+  & > a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  & > a:hover{
+    color: var(--color-secondary);
+  }
 `
 
 const PageFooter = () => {
