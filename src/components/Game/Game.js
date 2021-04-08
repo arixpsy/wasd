@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import useGame from './../../hooks/useGame'
 import Cell from './Cell/Cell'
 import ProgressBar from './ProgressBar/ProgressBar'
@@ -15,13 +15,20 @@ const Game = () => {
     progress 
   } = useGame()
 
+  const ResetButtonRef = useRef();
+
   useEffect(() => {
     generateSequence()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleUserKeyPress = useCallback((event) => {
-    insertInput(event.keyCode)
+    if(event.keyCode === 9) {
+      event.preventDefault()
+      ResetButtonRef.current.focus()
+    } else {
+      insertInput(event.keyCode)
+    }
   },[insertInput])
 
   useEffect(() => {
@@ -50,7 +57,7 @@ const Game = () => {
           {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
         </RightView>
       </ViewSplittor>
-      <ResetButton onClick={resetButtonHandler}><BsArrowRepeat /></ResetButton>
+      <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
       <ProgressBar progress={progress}/>
     </Console>
   )
