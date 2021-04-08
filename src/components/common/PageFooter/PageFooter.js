@@ -27,8 +27,8 @@ const PageFooter = () => {
   return (
     <Footer>
       <Credits>
-        <Text><AiOutlineCode />Developed by <a href="https://github.com/arixpsy">Arix</a></Text>
-        <Text><FaCode />Source code on <a href="https://github.com/arixpsy/wasd">Github</a></Text>
+        <Text><AiOutlineCode />Developed by <a href="https://github.com/arixpsy" tabIndex="-1">Arix</a></Text>
+        <Text><FaCode />Source code on <a href="https://github.com/arixpsy/wasd" tabIndex="-1">Github</a></Text>
       </Credits>
       <Options>
         <DarkModeButton />

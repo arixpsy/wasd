@@ -14,5 +14,5 @@ export default function DarkModeButton() {
       localStorage.setItem("theme", theme);
     }
   }
-  return <button onClick={toggleDarkMode}>Switch</button>
+  return <button tabIndex="-1" onClick={toggleDarkMode}>Switch</button>
 }
