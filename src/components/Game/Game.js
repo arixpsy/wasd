@@ -31,6 +31,11 @@ const Game = () => {
     };
   }, [handleUserKeyPress]);
 
+  const resetButtonHandler = () => {
+    resetGame()
+    document.activeElement.blur()
+  }
+
   return (
     <Console>
       <StopWatch>
@@ -45,7 +50,7 @@ const Game = () => {
           {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
         </RightView>
       </ViewSplittor>
-      <ResetButton onClick={resetGame}><BsArrowRepeat /></ResetButton>
+      <ResetButton onClick={resetButtonHandler}><BsArrowRepeat /></ResetButton>
       <ProgressBar progress={progress}/>
     </Console>
   )
