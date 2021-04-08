@@ -43,8 +43,10 @@ body.dark {
 
 body {
   background: var(--color-background-main);
+  transition: background 0.5s ease;
 }
 
 h1,p {
   color: var(--color-text-main);
+  transition: color 0.5s ease;
 }

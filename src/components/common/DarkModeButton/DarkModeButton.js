@@ -1,4 +1,17 @@
 import React from 'react'
+import { CgDarkMode } from 'react-icons/cg'
+import styled from 'styled-components'
+
+const DarkButton = styled.button`
+  display: flex;
+  outline: none;
+  background: none;
+  font-size: 2rem;
+  color: var(--color-text-main);
+  border: none;
+  cursor: pointer;
+`
+
 
 export default function DarkModeButton() {
   const toggleDarkMode = () => {
@@ -14,5 +27,5 @@ export default function DarkModeButton() {
       localStorage.setItem("theme", theme);
     }
   }
-  return <button tabIndex="-1" onClick={toggleDarkMode}>Switch</button>
+  return <DarkButton tabIndex="-1" onClick={toggleDarkMode}><CgDarkMode /></DarkButton>
 }
