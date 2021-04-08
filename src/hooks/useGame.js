@@ -3,11 +3,13 @@ import useStopWatch from './useStopWatch'
 import _ from 'lodash'
 
 const GENERATE_COUNT = 20
+
 const INPUTS = Object.freeze({
   ARROW: ['up', 'down', 'left', 'right'],
   LETTER: ['w', 'a', 's', 'd']
 })
-const validKeyCode = {
+
+const VALID_KEYS = {
   87: 'w',
   65: 'a',
   83: 's',
@@ -26,7 +28,7 @@ const useGame = () => {
   // const [gameState, setGameState] = useState('create')
 
   // Generate new sequence 
-  const generateAllSequence = () => {
+  const generateSequence = () => {
     let sequenceArrow = []
     let sequenceLetter = []
     for (let i = 0; i < GENERATE_COUNT; i++) {
@@ -40,14 +42,14 @@ const useGame = () => {
 
   // Handle correct wasd⬆⬇⬅➡ inputs
   const gameButtonPress = (keyCode) => {
-    if (Object.keys(validKeyCode).includes(keyCode.toString())) {
+    if (Object.keys(VALID_KEYS).includes(keyCode.toString())) {
       startStopWatch()
-      let enterKey = validKeyCode[keyCode]
-      if (arrowSequence.length > 0 && arrowSequence[0].input === enterKey) {
+      let enteredKey = VALID_KEYS[keyCode]
+      if (arrowSequence.length > 0 && arrowSequence[0].input === enteredKey) {
         setArrowSequence(arrowSequence.slice(1))
         return true
       }
-      if (letterSequence.length > 0 && letterSequence[0].input === enterKey) {
+      if (letterSequence.length > 0 && letterSequence[0].input === enteredKey) {
         setLetterSequence(letterSequence.slice(1))
         return true
       }
@@ -66,7 +68,7 @@ const useGame = () => {
   // Handle reset game
   const resetGame = () => {
     resetStopWatch()
-    generateAllSequence()
+    generateSequence()
   }
 
   // Update game progress on successful key input
@@ -76,16 +78,10 @@ const useGame = () => {
 
   return {
     resetGame: () => resetGame(),
-    generateSequence: () => generateAllSequence(),
+    generateSequence: () => generateSequence(),
     sequence: {
-      letter: {
-        get: letterSequence,
-        set: (input) => setLetterSequence(input)
-      },
-      arrow: {
-        get: arrowSequence,
-        set: (input) => setArrowSequence(input)
-      }
+      letters: letterSequence,
+      arrows: arrowSequence
     },
     insertInput: (keyCode) => gameButtonPress(keyCode),
     progress,

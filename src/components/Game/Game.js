@@ -37,11 +37,11 @@ const Game = () => {
       </StopWatch>
       <ViewSplittor>
         <LeftView>
-          {sequence.letter.get.map(item => <Cell key={item.key} character={item.input} left={true} />)}
+          {sequence.letters.map(item => <Cell key={item.key} character={item.input} left={true} />)}
         </LeftView>
         <VerticalBorder />
         <RightView>
-          {sequence.arrow.get.map(item => <Cell key={item.key} character={item.input} left={false} />)}
+          {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
         </RightView>
       </ViewSplittor>
       <button onClick={resetGame}>reset</button>
