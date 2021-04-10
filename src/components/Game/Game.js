@@ -66,7 +66,7 @@ const Game = () => {
           <ProgressBar progress={progress}/>
         </> 
       :
-        <Result logs={logs}>
+        <Result logs={logs} stopWatch={stopWatch}>
           <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
         </Result>
       }
