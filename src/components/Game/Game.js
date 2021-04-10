@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react'
 import useGame from './../../hooks/useGame'
 import Cell from './Cell/Cell'
 import ProgressBar from './ProgressBar/ProgressBar'
+import Result from './Result/Result'
 import { Console, StopWatch, ViewSplittor, LeftView, RightView, VerticalBorder, ResetButton } from './style'
 import { BsArrowRepeat } from 'react-icons/bs'
 
@@ -12,7 +13,9 @@ const Game = () => {
     insertInput,
     stopWatch,
     resetGame,
-    progress 
+    progress,
+    gameState,
+    logs
   } = useGame()
 
   const ResetButtonRef = useRef();
@@ -45,20 +48,28 @@ const Game = () => {
 
   return (
     <Console>
-      <StopWatch>
-        { stopWatch.time.toFixed(2) }
-      </StopWatch>
-      <ViewSplittor>
-        <LeftView>
-          {sequence.letters.map(item => <Cell key={item.key} character={item.input} left={true} />)}
-        </LeftView>
-        <VerticalBorder />
-        <RightView>
-          {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
-        </RightView>
-      </ViewSplittor>
-      <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
-      <ProgressBar progress={progress}/>
+      { gameState !== 'end' ?
+        <>
+          <StopWatch>
+            { stopWatch.time.toFixed(2) }
+          </StopWatch>
+          <ViewSplittor>
+            <LeftView>
+              {sequence.letters.map(item => <Cell key={item.key} character={item.input} left={true} />)}
+            </LeftView>
+            <VerticalBorder />
+            <RightView>
+              {sequence.arrows.map(item => <Cell key={item.key} character={item.input} left={false} />)}
+            </RightView>
+          </ViewSplittor>
+          <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
+          <ProgressBar progress={progress}/>
+        </> 
+      :
+        <Result logs={logs}>
+          <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
+        </Result>
+      }
     </Console>
   )
 }
