@@ -93,7 +93,7 @@ const useGame = () => {
       stopStopWatch()
       setGameState(GAME_STATE.END)
     }
-  }, [letterSequence, arrowSequence, stopStopWatch])
+  }, [letterSequence, arrowSequence, stopStopWatch, gameState])
 
   // Handle reset game
   const resetGame = () => {
