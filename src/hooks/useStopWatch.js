@@ -8,8 +8,8 @@ const useStopWatch = () => {
       let interval;
       if (isRunning) {
         interval = setInterval(
-          () => setElapsedTime(prevElapsedTime => prevElapsedTime + 0.1),
-          100
+          () => setElapsedTime(prevElapsedTime => prevElapsedTime + 0.01),
+          10
         );
       }
       return () => clearInterval(interval);
