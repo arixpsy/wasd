@@ -28,18 +28,22 @@ const useGame = () => {
   const [generateCount, setGenerateCount] = useState(20)
   const [letterSequence, setLetterSequence] = useState([])
   const [arrowSequence, setArrowSequence] = useState([])
-  const { elapsedTime, startStopWatch, stopStopWatch, resetStopWatch} = useStopWatch()
+  const { elapsedTime, startStopWatch, stopStopWatch, resetStopWatch } = useStopWatch()
   const [progress, setProgress] = useState({ arrow: 0, letter: 0 })
   const [gameState, setGameState] = useState(GAME_STATE.NEW)
+  const [letterLog, setLetterLogs] = useState([])
+  const [arrowLog, setArrowLogs] = useState([])
 
   // Generate new sequence 
   const generateSequence = () => {
     let sequenceArrow = []
     let sequenceLetter = []
+
     for (let i = 0; i < generateCount; i++) {
       sequenceArrow.push({key: `arrow${i}`, input: INPUTS.ARROW[_.random(3)]})
       sequenceLetter.push({key: `letter${i}`, input: INPUTS.LETTER[_.random(3)]})
     }
+
     setArrowSequence(sequenceArrow)
     setLetterSequence(sequenceLetter)
   }
@@ -48,18 +52,35 @@ const useGame = () => {
   // Handle correct wasd⬆⬇⬅➡ inputs
   const gameButtonPress = (keyCode) => {
     if (Object.keys(VALID_KEYS).includes(keyCode.toString())) {
+
       if (gameState === GAME_STATE.NEW) {
         startStopWatch()
         setGameState(GAME_STATE.RUNNING)
       }
+
       let enteredKey = VALID_KEYS[keyCode]
-      if (arrowSequence.length > 0 && arrowSequence[0].input === enteredKey) {
-        setArrowSequence(arrowSequence.slice(1))
-        return true
+
+      if (arrowSequence.length > 0) {
+        if (arrowSequence[0].input === enteredKey) {
+          setArrowSequence(arrowSequence.slice(1))
+          logInput(enteredKey, true)
+          return true
+        } else if (INPUTS.ARROW.includes(enteredKey)) {
+          logInput(enteredKey, false)
+          return false
+        }
       }
-      if (letterSequence.length > 0 && letterSequence[0].input === enteredKey) {
-        setLetterSequence(letterSequence.slice(1))
-        return true
+
+      if (letterSequence.length > 0) {
+        if (letterSequence[0].input === enteredKey) {
+          setLetterSequence(letterSequence.slice(1))
+          logInput(enteredKey, true)
+          return true
+        } else if (INPUTS.LETTER.includes(enteredKey)) {
+          logInput(enteredKey, false)
+          return false
+        }
+        
       }
       return false
     }
@@ -68,7 +89,7 @@ const useGame = () => {
 
   // Check for game end
   useEffect(() => {
-    if (arrowSequence.length === 0 && letterSequence.length === 0){
+    if (arrowSequence.length === 0 && letterSequence.length === 0 && gameState !== 'new') {
       stopStopWatch()
       setGameState(GAME_STATE.END)
     }
@@ -80,10 +101,12 @@ const useGame = () => {
     stopStopWatch()
     resetStopWatch()
     generateSequence()
+    setLetterLogs([])
+    setArrowLogs([])
   }
 
   // Update game progress on successful key input
-  useEffect(()=> {
+  useEffect(() => {
     const arrowCount = arrowSequence.length
     const letterCount = letterSequence.length
     setProgress({
@@ -91,6 +114,20 @@ const useGame = () => {
       letter: (generateCount - letterCount) / generateCount
     })
   },[letterSequence, arrowSequence, setProgress, generateCount])
+
+  // Log User Input
+  const logInput = (key, wasCorrect) => {
+    const newLog = {
+      key,
+      timePressed: elapsedTime,
+      correct: wasCorrect
+    }
+    if (INPUTS.LETTER.includes(key)) {
+      setLetterLogs([...letterLog, newLog])
+    } else if (INPUTS.ARROW.includes(key)) {
+      setArrowLogs([...arrowLog, newLog])
+    }
+  }
 
   return {
     resetGame: () => resetGame(),
@@ -103,6 +140,10 @@ const useGame = () => {
     insertInput: (keyCode) => gameButtonPress(keyCode),
     gameState,
     progress,
+    logs: {
+      letterLog,
+      arrowLog
+    },
     stopWatch: {
       time: elapsedTime,
       start: () => startStopWatch,
