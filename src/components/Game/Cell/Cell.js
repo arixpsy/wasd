@@ -6,8 +6,8 @@ const Circle = styled.div`
   height: 100px;
   background-color: ${props => (
     props.character === 'up' || props.character === 'w' ? 'var(--color-primary)'
-    : props.character === 'down' || props.character === 's'  ? 'var(--color-secondary)'
-    : props.character === 'left' || props.character === 'a'  ? 'var(--color-tertiary)'
+    : props.character === 'left' || props.character === 'a'  ? 'var(--color-secondary)'
+    : props.character === 'down' || props.character === 's'  ? 'var(--color-tertiary)'
     : 'var(--color-quaternary)'
   )};
   border-radius: 50px;
