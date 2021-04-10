@@ -24,7 +24,7 @@ const useGame = () => {
   const [arrowSequence, setArrowSequence] = useState([])
   const { elapsedTime, startStopWatch, stopStopWatch, resetStopWatch} = useStopWatch()
   const [progress, setProgress] = useState({ arrow: 0, letter: 0 })
-  // const [gameState, setGameState] = useState('create')
+  const [gameState, setGameState] = useState('new')
 
   // Generate new sequence 
   const generateSequence = () => {
@@ -42,7 +42,10 @@ const useGame = () => {
   // Handle correct wasd⬆⬇⬅➡ inputs
   const gameButtonPress = (keyCode) => {
     if (Object.keys(VALID_KEYS).includes(keyCode.toString())) {
-      startStopWatch()
+      if (gameState === 'new') {
+        startStopWatch()
+        setGameState('running')
+      }
       let enteredKey = VALID_KEYS[keyCode]
       if (arrowSequence.length > 0 && arrowSequence[0].input === enteredKey) {
         setArrowSequence(arrowSequence.slice(1))
@@ -61,11 +64,13 @@ const useGame = () => {
   useEffect(() => {
     if (arrowSequence.length === 0 && letterSequence.length === 0){
       stopStopWatch()
+      setGameState('end')
     }
   }, [letterSequence, arrowSequence, stopStopWatch])
 
   // Handle reset game
   const resetGame = () => {
+    setGameState('new')
     stopStopWatch()
     resetStopWatch()
     generateSequence()
@@ -83,13 +88,14 @@ const useGame = () => {
 
   return {
     resetGame: () => resetGame(),
-    generateSequence: () => generateSequence(),
     sequence: {
       letters: letterSequence,
       arrows: arrowSequence
     },
+    generateSequence: () => generateSequence(),
     changeGenerateCount: (number) => setGenerateCount(number),
     insertInput: (keyCode) => gameButtonPress(keyCode),
+    gameState,
     progress,
     stopWatch: {
       time: elapsedTime,
