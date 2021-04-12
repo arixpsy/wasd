@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Line } from 'react-chartjs-2';
 
 const ResultContainer = styled.div`
   width: 100%;
@@ -36,6 +35,11 @@ const StatNumber = styled.h1`
 
 `
 
+const ResultNavigation = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 const Result = ({ children, logs, stopWatch }) => {
   const [accuracy, setAccuracy] = useState(0)
   const [apm, setApm] = useState(0)
@@ -56,21 +60,6 @@ const Result = ({ children, logs, stopWatch }) => {
     setApm(60 / endTime * correctInput.length)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const chartData = {
-    labels: ['1','2','3','4','5','6','7'],
-    datasets: [{
-      label: 'My First Dataset',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1
-    }],
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
-    }
-  }
 
   return (
     <>
@@ -98,8 +87,7 @@ const Result = ({ children, logs, stopWatch }) => {
             <StatNumber>{ errors }</StatNumber>
           </Stat>
         </OverallStats>
-        <Line data={chartData}></Line>
-        { children }
+        <ResultNavigation>{ children }</ResultNavigation>
       </ResultContainer>
     </>
   )
