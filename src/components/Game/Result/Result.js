@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import StatsChart from './StatsCharts/StatsChart'
 
 const ResultContainer = styled.div`
   width: 100%;
@@ -87,6 +88,7 @@ const Result = ({ children, logs, stopWatch }) => {
             <StatNumber>{ errors }</StatNumber>
           </Stat>
         </OverallStats>
+        <StatsChart />
         <ResultNavigation>{ children }</ResultNavigation>
       </ResultContainer>
     </>
