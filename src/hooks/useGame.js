@@ -63,10 +63,10 @@ const useGame = () => {
       if (arrowSequence.length > 0) {
         if (arrowSequence[0].input === enteredKey) {
           setArrowSequence(arrowSequence.slice(1))
-          logInput(enteredKey, true)
+          logInput(enteredKey, 'arrow', true)
           return true
         } else if (INPUTS.ARROW.includes(enteredKey)) {
-          logInput(enteredKey, false)
+          logInput(enteredKey, 'arrow', false)
           return false
         }
       }
@@ -74,10 +74,10 @@ const useGame = () => {
       if (letterSequence.length > 0) {
         if (letterSequence[0].input === enteredKey) {
           setLetterSequence(letterSequence.slice(1))
-          logInput(enteredKey, true)
+          logInput(enteredKey, 'letter', true)
           return true
         } else if (INPUTS.LETTER.includes(enteredKey)) {
-          logInput(enteredKey, false)
+          logInput(enteredKey, 'letter', false)
           return false
         }
         
@@ -116,9 +116,10 @@ const useGame = () => {
   },[letterSequence, arrowSequence, setProgress, generateCount])
 
   // Log User Input
-  const logInput = (key, wasCorrect) => {
+  const logInput = (key, type, wasCorrect) => {
     const newLog = {
       key,
+      type,
       timePressed: elapsedTime,
       correct: wasCorrect
     }
@@ -136,6 +137,7 @@ const useGame = () => {
       arrows: arrowSequence
     },
     generateSequence: () => generateSequence(),
+    generateCount,
     changeGenerateCount: (number) => setGenerateCount(number),
     insertInput: (keyCode) => gameButtonPress(keyCode),
     gameState,
