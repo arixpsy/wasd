@@ -15,7 +15,8 @@ const Game = () => {
     resetGame,
     progress,
     gameState,
-    logs
+    logs,
+    generateCount
   } = useGame()
 
   const ResetButtonRef = useRef();
@@ -66,7 +67,7 @@ const Game = () => {
           <ProgressBar progress={progress}/>
         </> 
       :
-        <Result logs={logs} stopWatch={stopWatch}>
+        <Result logs={logs} stopWatch={stopWatch} generateCount={generateCount}>
           <ResetButton onClick={resetButtonHandler} ref={ResetButtonRef}><BsArrowRepeat /></ResetButton>
         </Result>
       }

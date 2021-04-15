@@ -1,6 +1,7 @@
+import { min } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import StatsChart from './StatsCharts/StatsChart'
+import StatsChart from './StatsCharts/StatsChart'
 
 const ResultContainer = styled.div`
   width: 100%;
@@ -41,10 +42,11 @@ const ResultNavigation = styled.div`
   justify-content: center;
 `
 
-const Result = ({ children, logs, stopWatch }) => {
+const Result = ({ children, logs, stopWatch, generateCount }) => {
   const [accuracy, setAccuracy] = useState(0)
   const [apm, setApm] = useState(0)
   const [errors, setErrors] = useState(0)
+  const [analysis, setAnalysis] = useState([])
 
   useEffect(() => {
     // Find Accuracy
@@ -59,6 +61,28 @@ const Result = ({ children, logs, stopWatch }) => {
     // Find APM
     const endTime = Math.max.apply(Math, allLogs.map(function(log) { return log.timePressed; }))
     setApm(60 / endTime * correctInput.length)
+
+
+    // Calculate Effective Progress
+    let combinedLogs = [...logs.arrowLog, ...logs.letterLog].sort((a, b) => a.timePressed - b.timePressed)
+    let numberOfCorrectLetter = 0
+    let numberOfCorrectArrow = 0
+    
+    combinedLogs = combinedLogs.map((item) => {
+      if (item.type === 'arrow' && item.correct) {
+        numberOfCorrectArrow += 1
+      }
+      if (item.type === 'letter' && item.correct) {
+        numberOfCorrectLetter += 1
+      }
+      item.progress = min([numberOfCorrectLetter, numberOfCorrectArrow]) / generateCount * 100
+      item.arrowProgress = numberOfCorrectArrow / generateCount * 100
+      item.letterProgress = numberOfCorrectLetter / generateCount * 100
+
+      return item
+    })
+
+    setAnalysis(combinedLogs)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -88,7 +112,7 @@ const Result = ({ children, logs, stopWatch }) => {
             <StatNumber>{ errors }</StatNumber>
           </Stat>
         </OverallStats>
-        {/* <StatsChart /> */}
+        <StatsChart analysis={analysis} />
         <ResultNavigation>{ children }</ResultNavigation>
       </ResultContainer>
     </>
