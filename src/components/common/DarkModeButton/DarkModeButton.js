@@ -1,6 +1,8 @@
 import React from 'react'
 import { CgDarkMode } from 'react-icons/cg'
 import styled from 'styled-components'
+import { triggerDarkMode } from './../../../actions/triggerDarkMode'
+import { useDispatch } from 'react-redux'
 
 const DarkButton = styled.button`
   display: flex;
@@ -14,6 +16,8 @@ const DarkButton = styled.button`
 
 
 export default function DarkModeButton() {
+  const dispatch = useDispatch()
+
   const toggleDarkMode = () => {
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -26,6 +30,8 @@ export default function DarkModeButton() {
       let theme = document.body.classList.contains("dark") ? "dark" : "light";
       localStorage.setItem("theme", theme);
     }
+
+    dispatch(triggerDarkMode())
   }
   return <DarkButton tabIndex="-1" onClick={toggleDarkMode}><CgDarkMode /></DarkButton>
 }

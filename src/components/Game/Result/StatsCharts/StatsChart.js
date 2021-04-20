@@ -1,66 +1,103 @@
 import React, { useRef, useEffect } from 'react'
 import Chart from 'chart.js/auto';
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const ChartContainer = styled.div`
-
+  height: 200px !important;
+  position: relative;
 `
 
 const StatsChart = ({ analysis }) => {
   const chartRef = useRef()
+  const triggerDarkMode = useSelector(state => state.triggerDarkMode)
 
   useEffect(() => {
     const primary = getComputedStyle(document.body).getPropertyValue('--color-primary');
     const secondary = getComputedStyle(document.body).getPropertyValue('--color-secondary');
-    const tertiary = getComputedStyle(document.body).getPropertyValue('--color-tertiary');
-    const quaternary = getComputedStyle(document.body).getPropertyValue('--color-quaternary');
-    console.log(analysis)
-    const myChart = new Chart(chartRef.current, {
-      type: 'line',
+    const textColor = getComputedStyle(document.body).getPropertyValue('--color-text-main');
+
+    const myChart = new Chart(chartRef.current.getContext('2d'), {
+      type: 'scatter',
       data: {
-          labels: analysis.map(item => item.timePressed),
           datasets: [
             {
-              label: 'Letter Input Progress(%)',
-              data: analysis.map(item => item.letterProgress),
-              borderWidth: 5,
+              label: 'Errors',
+              data:
+              analysis.filter(item => !item.correct).map((item) => {
+                const x = item.timePressed
+                const y = item.type
+                return {
+                  x: x,
+                  y: y
+                }
+              }),
+              borderWidth: 4,
               tension: 0,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: quaternary
+              backgroundColor: primary,
+              borderColor: primary,
+              pointStyle: 'crossRot',
+              radius: 10,
+              stack: 'combined',
+              type: 'scatter'
             },
             {
-              label: 'Arrow Input Progress(%)',
-              data: analysis.map(item => item.arrowProgress),
-              borderWidth: 5,
+              label: 'Key Input',
+              data: analysis.map(item => ({y: item.type, x: item.timePressed})),
+              borderWidth: 3,
               tension: 0,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: secondary
-            },
-            {
-              label: 'Total Effective Progress(%)',
-              data: analysis.map(item => item.progress),
-              borderWidth: 5,
-              tension: 0,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: tertiary
+              backgroundColor: secondary,
+              borderColor: secondary,
+              stack: 'combined'
             }
         ]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
         plugins: {
           legend: {
             display: false
           },
-          title: {
-            display: false
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                return `${context.raw.y.charAt(0).toUpperCase() + context.raw.y.slice(1)} key at ${context.raw.x.toFixed(2)} seconds`
+              }
+            }
           }
         },
         scales: {
             y: {
-              beginAtZero: true
+              title: {
+                padding: 20,
+                color: textColor,
+                font: {
+                  family: "'Space Mono'"
+                }
+              },
+              type: 'category',
+              ticks: {
+                color: textColor,
+                font: {
+                  family: "'Space Mono'"
+                },
+                align: 'center',
+                padding: 0,
+                callback: function(index, value, values) {
+                  return index === 0 ? 'Arrow Inputs' : 'Letter Inputs'
+                }
+              }
             },
             x: {
-              type: 'linear'
+              type: 'linear',
+              ticks: {
+                color: textColor,
+                font: {
+                  family: "'Space Mono'"
+                }
+              }
             }
         }
       }
@@ -69,11 +106,11 @@ const StatsChart = ({ analysis }) => {
       myChart.destroy()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [analysis])
+  }, [analysis, triggerDarkMode])
 
   return (
     <ChartContainer>
-      <canvas ref={chartRef}></canvas>
+      <canvas id="myChart" ref={chartRef}></canvas>
     </ChartContainer>
   )
 }
