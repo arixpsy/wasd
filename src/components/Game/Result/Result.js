@@ -7,7 +7,7 @@ const ResultContainer = styled.div`
   padding: 1rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  justify-content: center;
 `
 
 const OverallStats = styled.div`
