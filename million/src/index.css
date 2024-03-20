@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family:
+    'Space Mono',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
