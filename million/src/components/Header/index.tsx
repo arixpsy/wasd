@@ -2,7 +2,7 @@ const Header = () => {
   return (
     <div className='h-[100px]'>
       <svg
-        className='text-gray h-full w-auto dark:text-white'
+        className='h-full w-auto text-gray dark:text-white'
         viewBox='0 0 640 360'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
