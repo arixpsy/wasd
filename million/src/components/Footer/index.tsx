@@ -13,14 +13,22 @@ const Footer = () => {
         <p className='flex items-center gap-3'>
           <AiOutlineCode />
           Developed by{' '}
-          <a href='https://github.com/arixpsy' className='hover:underline underline-offset-4' tabIndex={-1}>
+          <a
+            href='https://github.com/arixpsy'
+            className='underline-offset-4 hover:underline'
+            tabIndex={-1}
+          >
             Arix
           </a>
         </p>
         <p className='flex items-center gap-3'>
           <FaCode />
           Source code on{' '}
-          <a href='https://github.com/arixpsy/wasd' className='hover:underline underline-offset-4' tabIndex={-1}>
+          <a
+            href='https://github.com/arixpsy/wasd'
+            className='underline-offset-4 hover:underline'
+            tabIndex={-1}
+          >
             Github
           </a>
         </p>
