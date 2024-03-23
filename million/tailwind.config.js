@@ -5,7 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: '#4d4d4d',
+        l: {
+          text: '#4d4d4d',
+          bg: '#ffffff'
+        },
+        d: {
+          text: '#9ca3af',
+          bg: '#4d4d4d'
+        },
         key1: '#e58b88',
         key2: '#9dabdd',
         key3: '#70ae98',

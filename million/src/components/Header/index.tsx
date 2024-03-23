@@ -1,8 +1,10 @@
+import OptionsMenuButton from '@/components/OptionsMenuButton'
+
 const Header = () => {
   return (
     <div className='flex h-[100px] justify-between'>
       <svg
-        className='h-full w-auto text-base dark:text-white'
+        className='h-full w-auto dark:text-white'
         viewBox='0 0 640 360'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -30,6 +32,10 @@ const Header = () => {
           </g>
         </g>
       </svg>
+
+      <div className='flex items-center'>
+        <OptionsMenuButton />
+      </div>
     </div>
   )
 }
