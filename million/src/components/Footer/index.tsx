@@ -1,14 +1,10 @@
-import { useContext } from 'react'
+import DarkModeButton from '@/components/DarkModeButton'
 import { AiOutlineCode } from 'react-icons/ai'
-import { CgDarkMode } from 'react-icons/cg'
 import { FaCode } from 'react-icons/fa'
-import { DarkModeContext } from '@/context/useDarkMode'
 
 const Footer = () => {
-  const { toggleDarkMode } = useContext(DarkModeContext)
-
   return (
-    <div className='flex justify-between'>
+    <div className='flex items-center justify-between'>
       <div>
         <p className='flex items-center gap-3'>
           <AiOutlineCode />
@@ -33,11 +29,8 @@ const Footer = () => {
           </a>
         </p>
       </div>
-      <div className='flex justify-end'>
-        <button onClick={toggleDarkMode}>
-          <CgDarkMode className='text-3xl' />
-        </button>
-      </div>
+
+      <DarkModeButton />
     </div>
   )
 }
