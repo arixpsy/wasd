@@ -4,7 +4,7 @@ import { FaCode } from 'react-icons/fa'
 
 const Footer = () => {
   return (
-    <div className='flex items-center justify-between'>
+    <div className='flex items-center justify-between text-sm'>
       <div className='flex flex-col gap-1'>
         <div className='flex items-center gap-3'>
           <AiOutlineCode />
@@ -12,7 +12,7 @@ const Footer = () => {
             Developed by
             <a
               href='https://github.com/arixpsy'
-              className='outline-gray-300 hover:bg-gray-300 dark:text-d-text ml-1 rounded-lg px-1.5 py-0.5 transition-colors dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
+              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-300 transition-colors hover:bg-gray-300 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
             >
               Arix
             </a>
@@ -24,7 +24,7 @@ const Footer = () => {
             Source code on
             <a
               href='https://github.com/arixpsy/wasd'
-              className='outline-gray-300 hover:bg-gray-300 dark:text-d-text ml-1 rounded-lg px-1.5 py-0.5 transition-colors dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
+              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-300 transition-colors hover:bg-gray-300 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
             >
               Github
             </a>
