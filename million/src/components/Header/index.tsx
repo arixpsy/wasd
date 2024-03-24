@@ -1,4 +1,5 @@
-import OptionsMenuButton from '@/components/OptionsMenuButton'
+import HeaderIconButton from '@/components/HeaderIconButton'
+import { IoMdSettings } from 'react-icons/io'
 
 const Header = () => {
   return (
@@ -34,7 +35,9 @@ const Header = () => {
       </svg>
 
       <div className='flex items-center'>
-        <OptionsMenuButton />
+        <HeaderIconButton>
+          <IoMdSettings />
+        </HeaderIconButton>
       </div>
     </div>
   )
