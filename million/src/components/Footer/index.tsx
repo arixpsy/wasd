@@ -12,7 +12,7 @@ const Footer = () => {
             Developed by
             <a
               href='https://github.com/arixpsy'
-              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-300 transition-colors hover:bg-gray-300 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
+              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-200 transition-colors hover:bg-gray-200 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
             >
               Arix
             </a>
@@ -24,7 +24,7 @@ const Footer = () => {
             Source code on
             <a
               href='https://github.com/arixpsy/wasd'
-              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-300 transition-colors hover:bg-gray-300 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
+              className='ml-1 rounded-lg px-1.5 py-0.5 outline-gray-200 transition-colors hover:bg-gray-200 dark:text-d-text dark:outline-white dark:hover:bg-transparent dark:hover:text-white'
             >
               Github
             </a>
