@@ -4,7 +4,7 @@ import {
   disableDarkMode,
   resetTheme,
   toggleDarkMode,
-} from '@/utils/functions/darkmode'
+} from '@/utils/functions/darkModeRename'
 
 type DarkModeContext = {
   enableDarkMode: () => void
