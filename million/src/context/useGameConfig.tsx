@@ -22,9 +22,10 @@ const GameConfigProvider = ({ children }: PropsWithChildren) => {
     Record<ConfigOption, number>
   >(getDefaultConfigOptions(GameMode.SINGLE_SEQUENCES))
 
-  // TODO: handle default
-  const handleSetGameMode = (mode: GameMode) => setGameMode(mode)
-
+  const handleSetGameMode = (mode: GameMode) => {
+    setConfigOptions(getDefaultConfigOptions(mode))
+    setGameMode(mode)
+  }
   const handleSetConfig = (option: ConfigOption, value: number) =>
     setConfigOptions((config) => ({
       ...config,
