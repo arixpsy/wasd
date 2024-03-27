@@ -12,4 +12,3 @@ export const ConfigOption = {
 } as const
 
 export type ConfigOption = (typeof ConfigOption)[keyof typeof ConfigOption]
-
