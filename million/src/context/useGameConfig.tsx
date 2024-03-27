@@ -4,18 +4,16 @@ import { getDefaultConfigOptions } from '@/utils/functions/gameConfig'
 
 type GameConfigContext = {
   gameMode: GameMode
-  setGameMode: React.Dispatch<React.SetStateAction<GameMode>>
+  handleSetGameMode: (mode: GameMode) => void
   configOptions: Record<ConfigOption, number>
-  setConfigOptions: React.Dispatch<
-    React.SetStateAction<Record<ConfigOption, number>>
-  >
+  handleSetConfig: (option: ConfigOption, value: number) => void
 }
 
 export const GameConfigContext = createContext<GameConfigContext>({
   gameMode: GameMode.SPLIT_SEQUENCE,
-  setGameMode: () => {},
+  handleSetGameMode: () => {},
   configOptions: getDefaultConfigOptions(GameMode.SINGLE_SEQUENCES),
-  setConfigOptions: () => {},
+  handleSetConfig: () => {},
 })
 
 const GameConfigProvider = ({ children }: PropsWithChildren) => {
@@ -24,13 +22,22 @@ const GameConfigProvider = ({ children }: PropsWithChildren) => {
     Record<ConfigOption, number>
   >(getDefaultConfigOptions(GameMode.SINGLE_SEQUENCES))
 
+  // TODO: handle default
+  const handleSetGameMode = (mode: GameMode) => setGameMode(mode)
+
+  const handleSetConfig = (option: ConfigOption, value: number) =>
+    setConfigOptions((config) => ({
+      ...config,
+      [option]: value,
+    }))
+
   return (
     <GameConfigContext.Provider
       value={{
         gameMode,
-        setGameMode,
+        handleSetGameMode,
         configOptions,
-        setConfigOptions,
+        handleSetConfig,
       }}
     >
       {children}
