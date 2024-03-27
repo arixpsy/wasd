@@ -1,5 +1,6 @@
-import { ConfigOption, GameMode } from '@/types'
 import { PropsWithChildren, createContext, useState } from 'react'
+import { ConfigOption, GameMode } from '@/types'
+import { getDefaultConfigOptions } from '@/utils/functions/gameConfig'
 
 type GameConfigContext = {
   gameMode: GameMode
@@ -13,10 +14,7 @@ type GameConfigContext = {
 export const GameConfigContext = createContext<GameConfigContext>({
   gameMode: GameMode.SPLIT_SEQUENCE,
   setGameMode: () => {},
-  configOptions: {
-    [ConfigOption.NUMBER_OF_KEYS]: 0,
-    [ConfigOption.NUMBER_OF_SETS]: 0,
-  },
+  configOptions: getDefaultConfigOptions(GameMode.SINGLE_SEQUENCES),
   setConfigOptions: () => {},
 })
 
@@ -24,10 +22,7 @@ const GameConfigProvider = ({ children }: PropsWithChildren) => {
   const [gameMode, setGameMode] = useState<GameMode>(GameMode.SINGLE_SEQUENCES)
   const [configOptions, setConfigOptions] = useState<
     Record<ConfigOption, number>
-  >({
-    [ConfigOption.NUMBER_OF_KEYS]: 0,
-    [ConfigOption.NUMBER_OF_SETS]: 0,
-  })
+  >(getDefaultConfigOptions(GameMode.SINGLE_SEQUENCES))
 
   return (
     <GameConfigContext.Provider
