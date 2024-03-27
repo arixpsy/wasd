@@ -26,6 +26,7 @@ const GameConfigProvider = ({ children }: PropsWithChildren) => {
     setConfigOptions(getDefaultConfigOptions(mode))
     setGameMode(mode)
   }
+
   const handleSetConfig = (option: ConfigOption, value: number) =>
     setConfigOptions((config) => ({
       ...config,
