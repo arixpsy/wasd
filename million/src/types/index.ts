@@ -12,3 +12,16 @@ export const ConfigOption = {
 } as const
 
 export type ConfigOption = (typeof ConfigOption)[keyof typeof ConfigOption]
+
+export const GameInputs = {
+  UP: 'ArrowUp',
+  DOWN: 'ArrowDown',
+  LEFT: 'ArrowLeft',
+  RIGHT: 'ArrowRight',
+  W: 'w',
+  A: 'a',
+  S: 's',
+  D: 'd',
+} as const
+
+export type GameInputs = (typeof GameInputs)[keyof typeof GameInputs]

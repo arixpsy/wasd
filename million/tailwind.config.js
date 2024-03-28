@@ -7,11 +7,13 @@ export default {
       colors: {
         l: {
           text: '#4d4d4d',
-          bg: '#ffffff'
+          bg: '#ffffff',
+          keyText: '#ffffff',
         },
         d: {
           text: '#9ca3af',
-          bg: '#4d4d4d'
+          bg: '#4d4d4d',
+          keyText: '#4d4d4d',
         },
         key1: '#e58b88',
         key2: '#9dabdd',
