@@ -14,7 +14,7 @@ const useStopwatch = () => {
     }
 
     return () => clearInterval(interval)
-  }, [isRunning])
+  }, [isRunning, startTime])
 
   const start = () => {
     setIsRunning(true)
