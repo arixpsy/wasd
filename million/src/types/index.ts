@@ -25,3 +25,11 @@ export const GameInputs = {
 } as const
 
 export type GameInputs = (typeof GameInputs)[keyof typeof GameInputs]
+
+export const GameState = {
+  READY: 'ready',
+  RUNNING: 'running',
+  COMPLETED: 'completed',
+} as const
+
+export type GameState = (typeof GameState)[keyof typeof GameState]
