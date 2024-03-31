@@ -87,12 +87,12 @@ const useSingleSequenceGame = (
     [currentSet, currentSetIndex, gameState, inputRef, keys, sets, start, stop]
   )
 
-  const handleFocusGameInput = () => {
+  const handleFocusGameInput = useCallback(() => {
     if (inputRef.current) {
       inputRef.current.focus()
       setIsGameInputFocused(true)
     }
-  }
+  }, [inputRef])
 
   const handleBlurGameInput = () => setIsGameInputFocused(false)
 
