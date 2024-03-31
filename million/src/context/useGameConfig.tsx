@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useState } from 'react'
 import { ConfigOption, GameMode } from '@/types'
-import { getDefaultConfigOptions } from '@/utils/functions/gameConfig'
+import { getDefaultConfigOptions } from '@/utils/functions/game'
 
 type GameConfigContext = {
   gameMode: GameMode
