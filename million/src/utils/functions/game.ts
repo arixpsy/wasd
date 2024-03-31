@@ -14,3 +14,18 @@ export const getDefaultConfigOptions = (mode: GameMode) => {
 
   return defaultConfig
 }
+
+// Single Sequence
+export const newViewState = (size: number) => new Array(size).fill(true)
+
+export const isInputSequenceCorrect = (
+  input: Array<string>,
+  sequence: Array<string>
+) => {
+  const lastInputIndex = input.length - 1
+
+  if (input[lastInputIndex] === sequence[lastInputIndex]) {
+    return true
+  }
+  return false
+}
