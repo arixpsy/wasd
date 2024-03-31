@@ -1,5 +1,6 @@
-import { GameMode, ConfigOption } from '@/types'
+import { GameMode, ConfigOption, GameInputs } from '@/types'
 import { GAME_CONFIG_OPTIONS } from '@/utils/constants/gameConfig'
+import { randomInt } from '@/utils/functions/utils'
 
 export const getDefaultConfigOptions = (mode: GameMode) => {
   const configList = GAME_CONFIG_OPTIONS[mode]
@@ -15,6 +16,9 @@ export const getDefaultConfigOptions = (mode: GameMode) => {
   return defaultConfig
 }
 
+export const generatedRandomGameInput = () =>
+  Object.values(GameInputs)[randomInt(7)]
+
 // Single Sequence
 export const newViewState = (size: number) => new Array(size).fill(true)
 
@@ -29,3 +33,9 @@ export const isInputSequenceCorrect = (
   }
   return false
 }
+
+export const getCurrentSet = (
+  sequence: Array<GameInputs>,
+  currentSetIndex: number,
+  keys: number
+) => sequence.slice(currentSetIndex * keys, currentSetIndex * keys + keys) || []
