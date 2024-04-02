@@ -22,6 +22,7 @@ const useSingleSequenceGame = (
   // State
   const [gameState, setGameState] = useState<GameState>(GameState.READY)
   const [isGameInputFocused, setIsGameInputFocused] = useState<boolean>(false)
+  const [isInputDisabled, setIsInputDisabled] = useState<boolean>(false)
   const [sequence, setSequence] = useState<Array<GameInputs>>([])
   const [currentSetIndex, setCurrentSetIndex] = useState<number>(0)
   const [keyTilesVisibleState, setKeyTilesVisibleState] = useState<
@@ -52,7 +53,10 @@ const useSingleSequenceGame = (
   const handleInput = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
       if (!Object.values(GameInputs).includes(e.key as GameInputs)) return
+      e.preventDefault()
+      if (gameState === GameState.COMPLETED) return
       if (!inputRef.current) return
+      if (isInputDisabled) return
 
       if (gameState === GameState.READY) {
         start()
@@ -70,21 +74,39 @@ const useSingleSequenceGame = (
 
         if (currentInputs.length === keys && currentSetIndex + 1 === sets) {
           stop()
+          setGameState(GameState.COMPLETED)
+          inputRef.current.value = ''
         } else if (currentInputs.length % keys === 0) {
           inputRef.current.value = ''
-          setCurrentSetIndex((v) => v + 1)
-          setKeyTilesVisibleState((currentViewState) =>
-            currentViewState.fill(true)
-          )
+          setIsInputDisabled(true)
+          setTimeout(() => {
+            setCurrentSetIndex((v) => v + 1)
+            setKeyTilesVisibleState((currentViewState) =>
+              currentViewState.fill(true)
+            )
+            setIsInputDisabled(false)
+          }, 250)
         }
       } else {
+        setIsInputDisabled(true)
         inputRef.current.value = ''
-        setKeyTilesVisibleState((v) => v.fill(true))
+        setTimeout(() => {
+          setKeyTilesVisibleState((v) => v.fill(true))
+          setIsInputDisabled(false)
+        }, 250)
       }
-
-      e.preventDefault()
     },
-    [currentSet, currentSetIndex, gameState, inputRef, keys, sets, start, stop]
+    [
+      currentSet,
+      currentSetIndex,
+      gameState,
+      inputRef,
+      keys,
+      sets,
+      start,
+      stop,
+      isInputDisabled,
+    ]
   )
 
   const handleFocusGameInput = useCallback(() => {
