@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { motion } from 'framer-motion'
 import {
   ImArrowUp,
   ImArrowDown,
@@ -26,8 +28,26 @@ const KeyTile = ({ keyInput, hidden = false }: KeyTileProps) => {
       keyInput
     )
 
+  const animations = useMemo(() => {
+    if (hidden) {
+      return { scale: 1.1, opacity: 0 }
+    }
+
+    return {}
+  }, [hidden])
+
+  const transitions = useMemo(() => {
+    if (hidden) {
+      return { duration: 0.25 }
+    }
+
+    return { duration: 0 }
+  }, [hidden])
+
   return (
-    <div
+    <motion.div
+      animate={animations}
+      transition={transitions}
       className={cn(
         'grid h-[100px] w-[100px] items-center justify-center rounded-full text-5xl font-bold capitalize text-l-keyText transition-opacity dark:text-d-keyText',
         {
@@ -35,12 +55,11 @@ const KeyTile = ({ keyInput, hidden = false }: KeyTileProps) => {
           'bg-key2': GameInputs.LEFT === keyInput || GameInputs.A === keyInput,
           'bg-key3': GameInputs.DOWN === keyInput || GameInputs.S === keyInput,
           'bg-key4': GameInputs.RIGHT === keyInput || GameInputs.D === keyInput,
-          'opacity-0': hidden
         }
       )}
     >
       {inputCharacter}
-    </div>
+    </motion.div>
   )
 }
 
