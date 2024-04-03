@@ -28,6 +28,7 @@ const useSingleSequenceGame = (
   const [keyTilesVisibleState, setKeyTilesVisibleState] = useState<
     Array<KeyTileViewState>
   >(newViewState(keys))
+  const [percentProgress, setPercentProgress] = useState<number>(0)
   const { start, stop, reset, time } = useStopwatch()
 
   // Derived State
@@ -73,6 +74,10 @@ const useSingleSequenceGame = (
           v.fill(KeyTileViewState.CORRECT, 0, currentInputs.length)
         )
         inputRef.current.value = currentInputs.toString()
+        setPercentProgress(
+          ((currentSetIndex * keys + currentInputs.length) / (keys * sets)) *
+            100
+        )
 
         if (currentInputs.length === keys && currentSetIndex + 1 === sets) {
           stop()
@@ -92,6 +97,7 @@ const useSingleSequenceGame = (
       } else {
         setIsInputDisabled(true)
         inputRef.current.value = ''
+        setPercentProgress(((currentSetIndex * keys) / (keys * sets)) * 100)
         setKeyTilesVisibleState((v) =>
           v.fill(
             KeyTileViewState.WRONG,
@@ -153,6 +159,7 @@ const useSingleSequenceGame = (
     handleInput,
     isGameInputFocused,
     keyTilesVisibleState,
+    progress: percentProgress,
     resetGame,
     stopWatch: {
       time,
