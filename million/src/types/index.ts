@@ -33,3 +33,12 @@ export const GameState = {
 } as const
 
 export type GameState = (typeof GameState)[keyof typeof GameState]
+
+export const KeyTileViewState = {
+  DEFAULT: 'default',
+  CORRECT: 'correct',
+  WRONG: 'wrong',
+} as const
+
+export type KeyTileViewState =
+  (typeof KeyTileViewState)[keyof typeof KeyTileViewState]
