@@ -1,4 +1,4 @@
-import { GameMode, ConfigOption, GameInputs } from '@/types'
+import { GameMode, ConfigOption, GameInputs, KeyTileViewState } from '@/types'
 import { GAME_CONFIG_OPTIONS } from '@/utils/constants/gameConfig'
 import { randomInt } from '@/utils/functions/utils'
 
@@ -20,7 +20,8 @@ export const generatedRandomGameInput = () =>
   Object.values(GameInputs)[randomInt(7)]
 
 // Single Sequence
-export const newViewState = (size: number) => new Array(size).fill(true)
+export const newViewState = (size: number): Array<KeyTileViewState> =>
+  new Array(size).fill(KeyTileViewState.DEFAULT)
 
 export const isInputSequenceCorrect = (
   input: Array<string>,

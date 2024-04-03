@@ -43,7 +43,7 @@ const SingleSequence = () => {
               <KeyTile
                 key={`${currentSetIndex} ${k} ${index}`}
                 keyInput={k}
-                hidden={!keyTilesVisibleState[index]}
+                viewState={keyTilesVisibleState[index]}
               />
             ))}
           </div>

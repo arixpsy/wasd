@@ -1,22 +1,25 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
+import { FaTimes } from 'react-icons/fa'
 import {
   ImArrowUp,
   ImArrowDown,
   ImArrowLeft,
   ImArrowRight,
 } from 'react-icons/im'
-import { GameInputs } from '@/types'
+import { GameInputs, KeyTileViewState } from '@/types'
 import { cn } from '@/utils/functions/utils'
 
 type KeyTileProps = {
   keyInput: GameInputs
-  hidden?: boolean
+  viewState: KeyTileViewState
 }
 
-const KeyTile = ({ keyInput, hidden = false }: KeyTileProps) => {
+const KeyTile = ({ keyInput, viewState }: KeyTileProps) => {
   const inputCharacter =
-    keyInput === GameInputs.UP ? (
+    viewState === KeyTileViewState.WRONG ? (
+      <FaTimes />
+    ) : keyInput === GameInputs.UP ? (
       <ImArrowUp />
     ) : keyInput === GameInputs.DOWN ? (
       <ImArrowDown />
@@ -29,20 +32,18 @@ const KeyTile = ({ keyInput, hidden = false }: KeyTileProps) => {
     )
 
   const animations = useMemo(() => {
-    if (hidden) {
-      return { scale: 1.1, opacity: 0 }
-    }
+    if (viewState == KeyTileViewState.DEFAULT) return {}
 
-    return {}
-  }, [hidden])
+    return { scale: 1.1, opacity: 0 }
+  }, [viewState])
 
   const transitions = useMemo(() => {
-    if (hidden) {
-      return { duration: 0.25 }
-    }
+    if (viewState == KeyTileViewState.CORRECT) return { duration: 0.25 }
+
+    if (viewState == KeyTileViewState.WRONG) return { duration: 0.5 }
 
     return { duration: 0 }
-  }, [hidden])
+  }, [viewState])
 
   return (
     <motion.div
@@ -55,6 +56,9 @@ const KeyTile = ({ keyInput, hidden = false }: KeyTileProps) => {
           'bg-key2': GameInputs.LEFT === keyInput || GameInputs.A === keyInput,
           'bg-key3': GameInputs.DOWN === keyInput || GameInputs.S === keyInput,
           'bg-key4': GameInputs.RIGHT === keyInput || GameInputs.D === keyInput,
+        },
+        {
+          'bg-red-600 dark:bg-rose-500': viewState === KeyTileViewState.WRONG,
         }
       )}
     >

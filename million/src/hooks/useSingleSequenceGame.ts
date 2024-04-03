@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react'
 import useStopwatch from '@/hooks/useStopwatch'
-import { GameInputs, GameState } from '@/types'
+import { GameInputs, GameState, KeyTileViewState } from '@/types'
 import {
   generatedRandomGameInput,
   getCurrentSet,
@@ -26,7 +26,7 @@ const useSingleSequenceGame = (
   const [sequence, setSequence] = useState<Array<GameInputs>>([])
   const [currentSetIndex, setCurrentSetIndex] = useState<number>(0)
   const [keyTilesVisibleState, setKeyTilesVisibleState] = useState<
-    Array<boolean>
+    Array<KeyTileViewState>
   >(newViewState(keys))
   const { start, stop, reset, time } = useStopwatch()
 
@@ -69,7 +69,9 @@ const useSingleSequenceGame = (
       currentInputs.push(e.key)
 
       if (isInputSequenceCorrect(currentInputs, currentSet)) {
-        setKeyTilesVisibleState((v) => v.fill(false, 0, currentInputs.length))
+        setKeyTilesVisibleState((v) =>
+          v.fill(KeyTileViewState.CORRECT, 0, currentInputs.length)
+        )
         inputRef.current.value = currentInputs.toString()
 
         if (currentInputs.length === keys && currentSetIndex + 1 === sets) {
@@ -82,7 +84,7 @@ const useSingleSequenceGame = (
           setTimeout(() => {
             setCurrentSetIndex((v) => v + 1)
             setKeyTilesVisibleState((currentViewState) =>
-              currentViewState.fill(true)
+              currentViewState.fill(KeyTileViewState.DEFAULT)
             )
             setIsInputDisabled(false)
           }, 250)
@@ -90,10 +92,18 @@ const useSingleSequenceGame = (
       } else {
         setIsInputDisabled(true)
         inputRef.current.value = ''
+        setKeyTilesVisibleState((v) =>
+          v.fill(
+            KeyTileViewState.WRONG,
+            currentInputs.length - 1,
+            currentInputs.length
+          )
+        )
+
         setTimeout(() => {
-          setKeyTilesVisibleState((v) => v.fill(true))
+          setKeyTilesVisibleState((v) => v.fill(KeyTileViewState.DEFAULT))
           setIsInputDisabled(false)
-        }, 250)
+        }, 500)
       }
     },
     [
