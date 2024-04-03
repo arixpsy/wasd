@@ -48,6 +48,7 @@ const useSingleSequenceGame = (
 
     setCurrentSetIndex(0)
     setSequence(generatedSequences)
+    setPercentProgress(0)
     setKeyTilesVisibleState(newViewState(keys))
   }, [keys, sets])
 
