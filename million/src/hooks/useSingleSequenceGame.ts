@@ -89,7 +89,7 @@ const useSingleSequenceGame = (
           stop()
           setGameState(GameState.COMPLETED)
           inputRef.current.value = ''
-        } else if (currentInputs.length % keys === 0) {
+        } else if (currentInputs.length === keys) {
           inputRef.current.value = ''
           setIsInputDisabled(true)
           setTimeout(() => {
