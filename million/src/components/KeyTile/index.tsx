@@ -32,7 +32,7 @@ const KeyTile = ({ keyInput, viewState }: KeyTileProps) => {
     )
 
   const animations = useMemo(() => {
-    if (viewState == KeyTileViewState.DEFAULT ) return { opacity: 1, scale: 1 }
+    if (viewState == KeyTileViewState.DEFAULT) return { opacity: 1, scale: 1 }
 
     return { scale: 1.1, opacity: 0 }
   }, [viewState])
