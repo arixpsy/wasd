@@ -12,6 +12,7 @@ import {
   getCurrentSet,
   isInputSequenceCorrect,
   newViewState,
+  setNextKeyViewState,
 } from '@/utils/functions/game'
 
 const useSingleSequenceGame = (
@@ -72,7 +73,11 @@ const useSingleSequenceGame = (
 
       if (isInputSequenceCorrect(currentInputs, currentSet)) {
         setKeyTilesVisibleState((v) =>
-          v.fill(KeyTileViewState.CORRECT, 0, currentInputs.length)
+          setNextKeyViewState(
+            v,
+            currentInputs.length - 1,
+            KeyTileViewState.CORRECT
+          )
         )
         inputRef.current.value = currentInputs.toString()
         setPercentProgress(
@@ -89,9 +94,7 @@ const useSingleSequenceGame = (
           setIsInputDisabled(true)
           setTimeout(() => {
             setCurrentSetIndex((v) => v + 1)
-            setKeyTilesVisibleState((currentViewState) =>
-              currentViewState.fill(KeyTileViewState.DEFAULT)
-            )
+            setKeyTilesVisibleState(newViewState(keys))
             setIsInputDisabled(false)
           }, 250)
         }
@@ -100,15 +103,15 @@ const useSingleSequenceGame = (
         inputRef.current.value = ''
         setPercentProgress(((currentSetIndex * keys) / (keys * sets)) * 100)
         setKeyTilesVisibleState((v) =>
-          v.fill(
-            KeyTileViewState.WRONG,
+          setNextKeyViewState(
+            v,
             currentInputs.length - 1,
-            currentInputs.length
+            KeyTileViewState.WRONG
           )
         )
 
         setTimeout(() => {
-          setKeyTilesVisibleState((v) => v.fill(KeyTileViewState.DEFAULT))
+          setKeyTilesVisibleState(newViewState(keys))
           setIsInputDisabled(false)
         }, 500)
       }

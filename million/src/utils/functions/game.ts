@@ -23,6 +23,16 @@ export const generatedRandomGameInput = () =>
 export const newViewState = (size: number): Array<KeyTileViewState> =>
   new Array(size).fill(KeyTileViewState.DEFAULT)
 
+export const setNextKeyViewState = (
+  currentViewState: Array<KeyTileViewState>,
+  nextKeyIndex: number,
+  state: KeyTileViewState
+): Array<KeyTileViewState> => {
+  const newViewState = [...currentViewState]
+  newViewState[nextKeyIndex] = state
+  return newViewState
+}
+
 export const isInputSequenceCorrect = (
   input: Array<string>,
   sequence: Array<string>
