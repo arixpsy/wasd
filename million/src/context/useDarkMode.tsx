@@ -1,9 +1,10 @@
-import { PropsWithChildren, createContext } from 'react'
+import { PropsWithChildren, createContext, useEffect } from 'react'
 import {
   enableDarkMode,
   disableDarkMode,
   resetTheme,
   toggleDarkMode,
+  setDarkMode,
 } from '@/utils/functions/darkMode'
 
 type DarkModeContext = {
@@ -21,6 +22,10 @@ export const DarkModeContext = createContext<DarkModeContext>({
 })
 
 const DarkModeProvider = ({ children }: PropsWithChildren) => {
+  useEffect(() => {
+    setDarkMode()
+  }, [])
+
   return (
     <DarkModeContext.Provider
       value={{
