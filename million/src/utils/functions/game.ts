@@ -27,11 +27,8 @@ export const setNextKeyViewState = (
   currentViewState: Array<KeyTileViewState>,
   nextKeyIndex: number,
   state: KeyTileViewState
-): Array<KeyTileViewState> => {
-  const newViewState = [...currentViewState]
-  newViewState[nextKeyIndex] = state
-  return newViewState
-}
+): Array<KeyTileViewState> =>
+  currentViewState.map((v, i) => (i === nextKeyIndex ? state : v))
 
 export const isInputSequenceCorrect = (
   input: Array<string>,
