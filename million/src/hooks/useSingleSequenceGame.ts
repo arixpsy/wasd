@@ -1,6 +1,7 @@
 import {
   KeyboardEventHandler,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useState,
@@ -14,6 +15,7 @@ import {
   newViewState,
   setNextKeyViewState,
 } from '@/utils/functions/game'
+import { SoundContext } from '@/context/useSound'
 
 const useSingleSequenceGame = (
   inputRef: React.RefObject<HTMLInputElement>,
@@ -31,6 +33,7 @@ const useSingleSequenceGame = (
   >(newViewState(keys))
   const [percentProgress, setPercentProgress] = useState<number>(0)
   const { start, stop, reset, time } = useStopwatch()
+  const { playKeySuccess } = useContext(SoundContext)
 
   // Derived State
   const currentSet = useMemo(
@@ -72,6 +75,7 @@ const useSingleSequenceGame = (
       currentInputs.push(e.key)
 
       if (isInputSequenceCorrect(currentInputs, currentSet)) {
+        playKeySuccess()
         setKeyTilesVisibleState((v) =>
           setNextKeyViewState(
             v,
@@ -126,6 +130,7 @@ const useSingleSequenceGame = (
       start,
       stop,
       isInputDisabled,
+      playKeySuccess,
     ]
   )
 
