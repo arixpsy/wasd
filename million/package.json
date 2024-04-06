@@ -13,6 +13,7 @@
   "dependencies": {
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.24",
+    "howler": "^2.2.4",
     "million": "^3.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
