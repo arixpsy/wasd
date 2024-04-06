@@ -42,3 +42,16 @@ export const KeyTileViewState = {
 
 export type KeyTileViewState =
   (typeof KeyTileViewState)[keyof typeof KeyTileViewState]
+
+export const Sound = {
+  OSU: 'osu.mp3',
+  MESO: 'meso.wav',
+} as const
+
+export type Sound = (typeof Sound)[keyof typeof Sound]
+
+export type SoundSettings = {
+  volume: number
+  keySuccessSound: Sound | ''
+  keyErrorSound: Sound | ''
+}
