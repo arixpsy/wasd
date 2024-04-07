@@ -1,4 +1,4 @@
-import { useMemo, memo } from 'react'
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { FaTimes } from 'react-icons/fa'
 import {
@@ -15,7 +15,7 @@ type KeyTileProps = {
   viewState: KeyTileViewState
 }
 
-const KeyTile = memo(({ keyInput, viewState }: KeyTileProps) => {
+const KeyTile = ({ keyInput, viewState }: KeyTileProps) => {
   const inputCharacter =
     viewState === KeyTileViewState.WRONG ? (
       <FaTimes />
@@ -65,6 +65,6 @@ const KeyTile = memo(({ keyInput, viewState }: KeyTileProps) => {
       {inputCharacter}
     </motion.div>
   )
-})
+}
 
 export default KeyTile
