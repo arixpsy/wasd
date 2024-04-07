@@ -1,7 +1,7 @@
 import DarkModeProvider from '@/context/useDarkMode'
 import GameConfigProvider from '@/context/useGameConfig'
 import SoundProvider from '@/context/useSound'
-import Home from '@/view/Home'
+import Home from '@/routes/Home'
 
 const App = () => {
   return (
