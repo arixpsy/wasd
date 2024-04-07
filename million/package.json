@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.26.12",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.24",
     "howler": "^2.2.4",
@@ -21,6 +22,8 @@
     "tailwind-merge": "^2.2.2"
   },
   "devDependencies": {
+    "@tanstack/router-devtools": "^1.26.12",
+    "@tanstack/router-vite-plugin": "^1.26.10",
     "@types/howler": "^2.2.11",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.64",
