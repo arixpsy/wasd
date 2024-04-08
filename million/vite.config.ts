@@ -1,3 +1,4 @@
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 import * as path from 'path'
 import { defineConfig } from 'vite'
 import checker from 'vite-plugin-checker'
@@ -15,6 +16,7 @@ export default defineConfig({
         lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
       },
     }),
+    TanStackRouterVite(),
   ],
   server: {
     port: 3000,
