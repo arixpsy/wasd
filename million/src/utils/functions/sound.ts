@@ -12,3 +12,6 @@ export const getSoundSettings = (): SoundSettings => {
 
   return parsedSettings
 }
+
+export const saveSoundSettings = (settings: SoundSettings) =>
+  (localStorage.sound = JSON.stringify(settings))
