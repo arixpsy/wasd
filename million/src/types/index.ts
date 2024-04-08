@@ -44,6 +44,7 @@ export type KeyTileViewState =
   (typeof KeyTileViewState)[keyof typeof KeyTileViewState]
 
 export const Sound = {
+  OFF: '',
   OSU: 'osu.mp3',
   MESO: 'meso.wav',
 } as const
