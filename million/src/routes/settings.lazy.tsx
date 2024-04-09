@@ -45,7 +45,7 @@ const Settings = () => {
   }, [soundSettings])
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='mb-3 flex flex-col gap-6 overflow-auto pb-6'>
       <h1 className='text-3xl font-bold'>Sound</h1>
 
       <SettingsOption

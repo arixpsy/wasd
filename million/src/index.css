@@ -23,3 +23,22 @@
 body {
   min-height: 100vh;
 }
+
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+  @apply dark:bg-neutral-700;
+  @apply rounded-md;
+  @apply transition-colors;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d4d4d;
+  @apply bg-neutral-700;
+  @apply dark:bg-gray-400;
+  @apply rounded-md;
+  @apply transition-colors;
+}
