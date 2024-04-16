@@ -4,8 +4,8 @@ export const GAME_CONFIG_OPTIONS: Record<
   GameMode,
   {
     [ConfigOption.NUMBER_OF_KEYS]: Array<number>
-    [ConfigOption.NUMBER_OF_SETS]: Array<number>
-    [ConfigOption.KEY_TYPE]: Array<KeyType>
+    [ConfigOption.NUMBER_OF_SETS]?: Array<number>
+    [ConfigOption.KEY_TYPE]?: Array<KeyType>
   }
 > = {
   [GameMode.SINGLE_SEQUENCES]: {
@@ -15,12 +15,8 @@ export const GAME_CONFIG_OPTIONS: Record<
   },
   [GameMode.SPLIT_SEQUENCE]: {
     [ConfigOption.NUMBER_OF_KEYS]: [10, 15, 20],
-    [ConfigOption.NUMBER_OF_SETS]: [1],
-    [ConfigOption.KEY_TYPE]: [KeyType.ALL],
   },
   [GameMode.EIGHT_SPLIT]: {
     [ConfigOption.NUMBER_OF_KEYS]: [20, 25, 30],
-    [ConfigOption.NUMBER_OF_SETS]: [1],
-    [ConfigOption.KEY_TYPE]: [KeyType.ALL],
   },
 }

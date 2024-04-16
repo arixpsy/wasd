@@ -19,9 +19,12 @@ export const getDefaultConfigOptions = (mode: GameMode) => {
 
   defaultConfig[ConfigOption.NUMBER_OF_KEYS] =
     configList[ConfigOption.NUMBER_OF_KEYS][0]
-  defaultConfig[ConfigOption.NUMBER_OF_SETS] =
-    configList[ConfigOption.NUMBER_OF_SETS][0]
-  defaultConfig[ConfigOption.KEY_TYPE] = configList[ConfigOption.KEY_TYPE][0]
+
+  const sets = configList[ConfigOption.NUMBER_OF_SETS]
+  const keyTypes = configList[ConfigOption.KEY_TYPE]
+
+  if (sets) defaultConfig[ConfigOption.NUMBER_OF_SETS] = sets[0]
+  if (keyTypes) defaultConfig[ConfigOption.KEY_TYPE] = keyTypes[0]
 
   return defaultConfig
 }

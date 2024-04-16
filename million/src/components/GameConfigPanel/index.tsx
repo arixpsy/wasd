@@ -28,7 +28,7 @@ const GameConfigPanel = () => {
           (config) => (
             <Fragment key={config}>
               <div className='h-5 w-1 rounded-lg bg-gray-300 dark:bg-neutral-600' />
-              {configOptionsDisplay[config].map((value) => (
+              {configOptionsDisplay[config]?.map((value) => (
                 <GameConfigOption
                   key={config + value}
                   isActive={configOptions[config] === value}
