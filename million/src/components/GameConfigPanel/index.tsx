@@ -24,21 +24,23 @@ const GameConfigPanel = () => {
           </GameConfigOption>
         ))}
 
-        {(Object.keys(configOptionsDisplay) as Array<ConfigOption>).map((config) => (
-          <Fragment key={config}>
-            <div className='h-5 w-1 rounded-lg bg-gray-300 dark:bg-neutral-600' />
-            {configOptionsDisplay[config].map((value) => (
-              <GameConfigOption
-                key={config + value}
-                isActive={configOptions[config] === value}
-                onClick={() => handleSetConfig(config, value)}
-              >
-                {config === ConfigOption.NUMBER_OF_SETS && 'x'}
-                {value}
-              </GameConfigOption>
-            ))}
-          </Fragment>
-        ))}
+        {(Object.keys(configOptionsDisplay) as Array<ConfigOption>).map(
+          (config) => (
+            <Fragment key={config}>
+              <div className='h-5 w-1 rounded-lg bg-gray-300 dark:bg-neutral-600' />
+              {configOptionsDisplay[config].map((value) => (
+                <GameConfigOption
+                  key={config + value}
+                  isActive={configOptions[config] === value}
+                  onClick={() => handleSetConfig(config, value)}
+                >
+                  {config === ConfigOption.NUMBER_OF_SETS && 'x'}
+                  {value}
+                </GameConfigOption>
+              ))}
+            </Fragment>
+          )
+        )}
       </div>
     </TransitionalDiv>
   )

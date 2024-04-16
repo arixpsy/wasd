@@ -1,4 +1,11 @@
-import { GameMode, ConfigOption, GameInputs, KeyTileViewState, KeyType, ConfigOptions } from '@/types'
+import {
+  GameMode,
+  ConfigOption,
+  GameInputs,
+  KeyTileViewState,
+  KeyType,
+  ConfigOptions,
+} from '@/types'
 import { GAME_CONFIG_OPTIONS } from '@/utils/constants/gameConfig'
 import { randomInt } from '@/utils/functions/utils'
 
@@ -7,18 +14,28 @@ export const getDefaultConfigOptions = (mode: GameMode) => {
   const defaultConfig: ConfigOptions = {
     [ConfigOption.NUMBER_OF_KEYS]: 0,
     [ConfigOption.NUMBER_OF_SETS]: 0,
-    [ConfigOption.KEY_TYPE]: KeyType.ALL
+    [ConfigOption.KEY_TYPE]: KeyType.ALL,
   }
 
-  defaultConfig[ConfigOption.NUMBER_OF_KEYS] = configList[ConfigOption.NUMBER_OF_KEYS][0]
-  defaultConfig[ConfigOption.NUMBER_OF_SETS] = configList[ConfigOption.NUMBER_OF_SETS][0]
+  defaultConfig[ConfigOption.NUMBER_OF_KEYS] =
+    configList[ConfigOption.NUMBER_OF_KEYS][0]
+  defaultConfig[ConfigOption.NUMBER_OF_SETS] =
+    configList[ConfigOption.NUMBER_OF_SETS][0]
   defaultConfig[ConfigOption.KEY_TYPE] = configList[ConfigOption.KEY_TYPE][0]
-  
+
   return defaultConfig
 }
 
-export const generatedRandomGameInput = () =>
-  Object.values(GameInputs)[randomInt(7)]
+export const generatedRandomGameInput = (type?: KeyType) => {
+  switch (type) {
+    case 'Arrows':
+      return Object.values(GameInputs)[randomInt(3)]
+    case 'Letters':
+      return Object.values(GameInputs)[randomInt(3) + 4]
+    default:
+      return Object.values(GameInputs)[randomInt(7)]
+  }
+}
 
 // Single Sequence
 export const newViewState = (size: number): Array<KeyTileViewState> =>

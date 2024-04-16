@@ -7,7 +7,11 @@ import { GameConfigContext } from '@/context/useGameConfig'
 const Index = () => {
   const {
     gameMode,
-    configOptions: { NUMBER_OF_KEYS: keys, NUMBER_OF_SETS: sets },
+    configOptions: {
+      NUMBER_OF_KEYS: keys,
+      NUMBER_OF_SETS: sets,
+      KEY_TYPE: keyType,
+    },
   } = useContext(GameConfigContext)
 
   const renderGame = useMemo(() => {
@@ -17,9 +21,9 @@ const Index = () => {
       case 'split sequence':
         return <></>
       default:
-        return <Game.Default key={gameMode + keys + sets} />
+        return <Game.Default key={gameMode + keys + sets + keyType} />
     }
-  }, [gameMode, keys, sets])
+  }, [gameMode, keys, sets, keyType])
 
   return (
     <div className='flex flex-col'>

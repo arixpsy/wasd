@@ -22,7 +22,8 @@ const SingleSequence = () => {
   } = useSingleSequenceGame(
     inputRef,
     configOptions.NUMBER_OF_KEYS,
-    configOptions.NUMBER_OF_SETS
+    configOptions.NUMBER_OF_SETS,
+    configOptions.KEY_TYPE
   )
 
   useEffect(() => handleFocusGameInput(), [handleFocusGameInput])

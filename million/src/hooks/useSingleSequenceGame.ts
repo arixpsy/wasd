@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react'
 import useStopwatch from '@/hooks/useStopwatch'
-import { GameInputs, GameState, KeyTileViewState } from '@/types'
+import { GameInputs, GameState, KeyTileViewState, KeyType } from '@/types'
 import {
   generatedRandomGameInput,
   getCurrentSet,
@@ -20,7 +20,8 @@ import { SoundContext } from '@/context/useSound'
 const useSingleSequenceGame = (
   inputRef: React.RefObject<HTMLInputElement>,
   keys: number,
-  sets: number
+  sets: number,
+  keyType: KeyType
 ) => {
   // State
   const [gameState, setGameState] = useState<GameState>(GameState.READY)
@@ -47,14 +48,14 @@ const useSingleSequenceGame = (
     const generatedSequences: Array<GameInputs> = []
 
     for (let i = 0; i < sequenceSize; i++) {
-      generatedSequences.push(generatedRandomGameInput())
+      generatedSequences.push(generatedRandomGameInput(keyType))
     }
 
     setCurrentSetIndex(0)
     setSequence(generatedSequences)
     setPercentProgress(0)
     setKeyTilesVisibleState(newViewState(keys))
-  }, [keys, sets])
+  }, [keys, sets, keyType])
 
   const handleInput = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
@@ -158,7 +159,7 @@ const useSingleSequenceGame = (
   useEffect(() => {
     generateSequence()
     if (inputRef.current) inputRef.current.value = ''
-  }, [keys, sets, generateSequence, inputRef])
+  }, [keys, sets, keyType, generateSequence, inputRef])
 
   return {
     currentSet,
