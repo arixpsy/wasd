@@ -9,9 +9,24 @@ export type GameMode = (typeof GameMode)[keyof typeof GameMode]
 export const ConfigOption = {
   NUMBER_OF_KEYS: 'NUMBER_OF_KEYS',
   NUMBER_OF_SETS: 'NUMBER_OF_SETS',
+  KEY_TYPE: 'KEY_TYPE',
 } as const
 
 export type ConfigOption = (typeof ConfigOption)[keyof typeof ConfigOption]
+
+export type ConfigOptions = {
+  [ConfigOption.NUMBER_OF_KEYS]: number
+  [ConfigOption.NUMBER_OF_SETS]: number
+  [ConfigOption.KEY_TYPE]: KeyType
+}
+
+export const KeyType = {
+  LETTERS: 'Letters',
+  ARROWS: 'Arrows',
+  ALL: 'All',
+} as const
+
+export type KeyType = (typeof KeyType)[keyof typeof KeyType]
 
 export const GameInputs = {
   UP: 'ArrowUp',

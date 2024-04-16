@@ -1,18 +1,19 @@
-import { GameMode, ConfigOption, GameInputs, KeyTileViewState } from '@/types'
+import { GameMode, ConfigOption, GameInputs, KeyTileViewState, KeyType, ConfigOptions } from '@/types'
 import { GAME_CONFIG_OPTIONS } from '@/utils/constants/gameConfig'
 import { randomInt } from '@/utils/functions/utils'
 
 export const getDefaultConfigOptions = (mode: GameMode) => {
   const configList = GAME_CONFIG_OPTIONS[mode]
-  const defaultConfig: Record<ConfigOption, number> = {
+  const defaultConfig: ConfigOptions = {
     [ConfigOption.NUMBER_OF_KEYS]: 0,
     [ConfigOption.NUMBER_OF_SETS]: 0,
+    [ConfigOption.KEY_TYPE]: KeyType.ALL
   }
 
-  for (const config of configList) {
-    defaultConfig[config.option] = config.values[0]
-  }
-
+  defaultConfig[ConfigOption.NUMBER_OF_KEYS] = configList[ConfigOption.NUMBER_OF_KEYS][0]
+  defaultConfig[ConfigOption.NUMBER_OF_SETS] = configList[ConfigOption.NUMBER_OF_SETS][0]
+  defaultConfig[ConfigOption.KEY_TYPE] = configList[ConfigOption.KEY_TYPE][0]
+  
   return defaultConfig
 }
 
