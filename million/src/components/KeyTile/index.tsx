@@ -50,7 +50,7 @@ const KeyTile = ({ keyInput, viewState }: KeyTileProps) => {
       animate={animations}
       transition={transitions}
       className={cn(
-        'grid h-[100px] w-[100px] items-center justify-center rounded-full text-5xl font-bold capitalize text-l-keyText transition-opacity dark:text-d-keyText',
+        'grid h-[100px] w-[100px] shrink-0 items-center justify-center rounded-full text-5xl font-bold capitalize text-l-keyText transition-opacity dark:text-d-keyText',
         {
           'bg-key1': GameInputs.UP === keyInput || GameInputs.W === keyInput,
           'bg-key2': GameInputs.LEFT === keyInput || GameInputs.A === keyInput,
