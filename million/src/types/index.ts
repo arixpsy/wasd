@@ -39,6 +39,20 @@ export const GameInputs = {
   D: 'd',
 } as const
 
+export const ArrowInputs = [
+  GameInputs.UP,
+  GameInputs.DOWN,
+  GameInputs.LEFT,
+  GameInputs.RIGHT,
+] as const
+
+export const LetterInputs = [
+  GameInputs.W,
+  GameInputs.A,
+  GameInputs.S,
+  GameInputs.D,
+] as const
+
 export type GameInputs = (typeof GameInputs)[keyof typeof GameInputs]
 
 export const GameState = {
