@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+* {
+  font-family:
+    'Space Mono',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-200;
+  @apply dark:bg-neutral-700;
+  @apply rounded-md;
+  @apply transition-colors;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4d4d4d;
+  @apply bg-neutral-700;
+  @apply dark:bg-gray-400;
+  @apply rounded-md;
+  @apply transition-colors;
+}
+
+@theme {
+  --color-l-text: #4d4d4d;
+  --color-l-bg: #ffffff;
+  --color-l-keyText: #ffffff;
+  --color-d-text: #9ca3af;
+  --color-d-bg: #4d4d4d;
+  --color-d-keyText: #4d4d4d;
+
+  --color-key1: #e58b88;
+  --color-key2: #9dabdd;
+  --color-key3: #70ae98;
+  --color-key4: #ecbe7a;
+}
