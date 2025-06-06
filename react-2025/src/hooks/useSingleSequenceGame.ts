@@ -7,7 +7,12 @@ import {
   useState,
 } from 'react'
 import useStopwatch from '@/hooks/useStopwatch'
-import { GameInputs, GameState, KeyTileViewState, KeyType } from '@/utils/constants/enums'
+import {
+  GameInputs,
+  GameState,
+  KeyTileViewState,
+  KeyType,
+} from '@/utils/constants/enums'
 import {
   generatedRandomGameInput,
   getCurrentSet,
@@ -33,8 +38,15 @@ const useSingleSequenceGame = (
     Array<KeyTileViewState>
   >(newViewState(keys))
   const [percentProgress, setPercentProgress] = useState<number>(0)
-  const { start, stop, reset, time } = useStopwatch()
+  const { elapsedTime, start, stop, reset, time } = useStopwatch()
   const { playKeySuccess } = useContext(SoundContext)
+  const [keylogs, setKeyLogs] = useState<
+    Array<{
+      key: GameInputs
+      timePressed: number
+      correct: boolean
+    }>
+  >([])
 
   // Derived State
   const currentSet = useMemo(
@@ -57,6 +69,18 @@ const useSingleSequenceGame = (
     setKeyTilesVisibleState(newViewState(keys))
   }, [keys, sets, keyType])
 
+  const logInput = useCallback(
+    (key: GameInputs, correct: boolean, timePressed: number) => {
+      const newLog = {
+        key,
+        timePressed,
+        correct,
+      }
+      setKeyLogs((c) => [...c, newLog])
+    },
+    []
+  )
+
   const handleInput = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
       if (!Object.values(GameInputs).includes(e.key as GameInputs)) return
@@ -77,6 +101,7 @@ const useSingleSequenceGame = (
 
       if (isInputSequenceCorrect(currentInputs, currentSet)) {
         playKeySuccess()
+        logInput(e.key as GameInputs, true, elapsedTime)
         setKeyTilesVisibleState((v) =>
           setNextKeyViewState(
             v,
@@ -104,6 +129,7 @@ const useSingleSequenceGame = (
           }, 250)
         }
       } else {
+        logInput(e.key as GameInputs, false, elapsedTime)
         setIsInputDisabled(true)
         inputRef.current.value = ''
         setPercentProgress(((currentSetIndex * keys) / (keys * sets)) * 100)
@@ -127,11 +153,13 @@ const useSingleSequenceGame = (
       gameState,
       inputRef,
       keys,
+      logInput,
       sets,
       start,
       stop,
       isInputDisabled,
       playKeySuccess,
+      elapsedTime,
     ]
   )
 
@@ -164,10 +192,12 @@ const useSingleSequenceGame = (
   return {
     currentSet,
     currentSetIndex,
+    gameState,
     handleBlurGameInput,
     handleFocusGameInput,
     handleInput,
     isGameInputFocused,
+    keylogs,
     keyTilesVisibleState,
     progress: percentProgress,
     resetGame,

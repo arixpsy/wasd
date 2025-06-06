@@ -35,6 +35,7 @@ const useStopwatch = () => {
     start,
     stop,
     reset,
+    elapsedTime,
     time: formattedTime,
   }
 }
