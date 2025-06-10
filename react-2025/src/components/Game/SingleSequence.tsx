@@ -2,8 +2,10 @@ import { useContext, useEffect, useRef } from 'react'
 import KeyTile from '@/components/KeyTile'
 import ProgressBar from '@/components/ProgressBar'
 import ResetGameButton from '@/components/ResetGameButton'
+import Results from '@/components/Results'
 import GameConfigContext from '@/context/useGameConfig'
 import useSingleSequenceGame from '@/hooks/useSingleSequenceGame'
+import { GameState } from '@/utils/constants/enums'
 
 const SingleSequence = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -11,10 +13,12 @@ const SingleSequence = () => {
   const {
     currentSet,
     currentSetIndex,
+    gameState,
     handleBlurGameInput,
     handleFocusGameInput,
     handleInput,
     isGameInputFocused,
+    keylogs,
     keyTilesVisibleState,
     progress,
     resetGame,
@@ -26,7 +30,22 @@ const SingleSequence = () => {
     configOptions.KEY_TYPE
   )
 
-  useEffect(() => handleFocusGameInput(), [handleFocusGameInput])
+  useEffect(() => {
+    if (gameState === GameState.READY) {
+      handleFocusGameInput()
+    }
+  }, [handleFocusGameInput, gameState])
+
+  if (gameState === GameState.COMPLETED)
+    return (
+      <div className='relative grid h-full place-items-center'>
+        <Results logs={keylogs} />
+
+        {/* TODO: add chartjs */}
+
+        <ResetGameButton onClick={resetGame} className='relative z-10 mt-10' />
+      </div>
+    )
 
   return (
     <div className='relative grid h-full items-center'>
@@ -50,6 +69,7 @@ const SingleSequence = () => {
               />
             ))}
           </div>
+
           {!isGameInputFocused && (
             <div className='absolute inset-0 grid items-center justify-center dark:text-white'>
               Click here to focus
@@ -65,9 +85,9 @@ const SingleSequence = () => {
           onBlur={handleBlurGameInput}
           onFocus={handleFocusGameInput}
         />
-        <div className='mt-10'>
-          <ResetGameButton onClick={resetGame} className='relative z-10' />
-        </div>
+
+        <ResetGameButton onClick={resetGame} className='relative z-10 mt-10' />
+
         <div className='my-6 flex w-full justify-center'>
           <ProgressBar progress={progress} />
         </div>
