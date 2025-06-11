@@ -54,6 +54,8 @@ export const LetterInputs = [
 ] as const
 
 export type GameInputs = (typeof GameInputs)[keyof typeof GameInputs]
+export type ArrowInputs = (typeof ArrowInputs)[number]
+export type LetterInputs = (typeof LetterInputs)[number]
 
 export const GameState = {
   READY: 'ready',

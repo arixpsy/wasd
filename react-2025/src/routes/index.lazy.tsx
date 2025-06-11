@@ -19,7 +19,7 @@ const Index = () => {
       case 'eight split':
         return <></>
       case 'split sequence':
-        return <></>
+        return <Game.Split key={gameMode + keys} />
       default:
         return <Game.Default key={gameMode + keys + sets + keyType} />
     }

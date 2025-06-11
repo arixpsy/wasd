@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react'
+import useKeyLog from '@/hooks/useKeyLog'
 import useStopwatch from '@/hooks/useStopwatch'
 import {
   GameInputs,
@@ -39,14 +40,8 @@ const useSingleSequenceGame = (
   >(newViewState(keys))
   const [percentProgress, setPercentProgress] = useState<number>(0)
   const { elapsedTime, start, stop, reset, time } = useStopwatch()
+  const { keylogs, clearLogs, addLog } = useKeyLog()
   const { playKeySuccess } = useContext(SoundContext)
-  const [keylogs, setKeyLogs] = useState<
-    Array<{
-      key: GameInputs
-      timePressed: number
-      correct: boolean
-    }>
-  >([])
 
   // Derived State
   const currentSet = useMemo(
@@ -69,18 +64,6 @@ const useSingleSequenceGame = (
     setKeyTilesVisibleState(newViewState(keys))
   }, [keys, sets, keyType])
 
-  const logInput = useCallback(
-    (key: GameInputs, correct: boolean, timePressed: number) => {
-      const newLog = {
-        key,
-        timePressed,
-        correct,
-      }
-      setKeyLogs((c) => [...c, newLog])
-    },
-    []
-  )
-
   const handleInput = useCallback<KeyboardEventHandler<HTMLInputElement>>(
     (e) => {
       if (!Object.values(GameInputs).includes(e.key as GameInputs)) return
@@ -101,7 +84,7 @@ const useSingleSequenceGame = (
 
       if (isInputSequenceCorrect(currentInputs, currentSet)) {
         playKeySuccess()
-        logInput(e.key as GameInputs, true, elapsedTime)
+        addLog(e.key as GameInputs, true, elapsedTime)
         setKeyTilesVisibleState((v) =>
           setNextKeyViewState(
             v,
@@ -129,7 +112,7 @@ const useSingleSequenceGame = (
           }, 250)
         }
       } else {
-        logInput(e.key as GameInputs, false, elapsedTime)
+        addLog(e.key as GameInputs, false, elapsedTime)
         setIsInputDisabled(true)
         inputRef.current.value = ''
         setPercentProgress(((currentSetIndex * keys) / (keys * sets)) * 100)
@@ -148,12 +131,12 @@ const useSingleSequenceGame = (
       }
     },
     [
+      addLog,
       currentSet,
       currentSetIndex,
       gameState,
       inputRef,
       keys,
-      logInput,
       sets,
       start,
       stop,
@@ -177,6 +160,7 @@ const useSingleSequenceGame = (
     generateSequence()
     setGameState(GameState.READY)
     handleFocusGameInput()
+    clearLogs()
 
     if (inputRef.current) {
       inputRef.current.value = ''
