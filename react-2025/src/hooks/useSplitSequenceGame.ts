@@ -89,11 +89,11 @@ const useSplitSequenceGame = (
           setArrowSequence(currentArrowSequence)
           setArrowProgress(((keys - currentArrowSequence.length) / keys) * 100)
           playKeySuccess()
-          addLog(e.key as GameInputs, true, elapsedTime)
+          addLog(e.key as GameInputs, true, elapsedTime, 'arrow')
         } else {
           setIsArrowInputDisabled(true)
           setArrowViewState(KeyTileViewState.WRONG)
-          addLog(e.key as GameInputs, false, elapsedTime)
+          addLog(e.key as GameInputs, false, elapsedTime, 'arrow')
           setTimeout(() => {
             setArrowViewState(KeyTileViewState.DEFAULT)
             setIsArrowInputDisabled(false)
@@ -112,11 +112,11 @@ const useSplitSequenceGame = (
             ((keys - currentLetterSequence.length) / keys) * 100
           )
           playKeySuccess()
-          addLog(e.key as GameInputs, true, elapsedTime)
+          addLog(e.key as GameInputs, true, elapsedTime, 'letter')
         } else {
           setIsLetterInputDisabled(true)
           setLetterViewState(KeyTileViewState.WRONG)
-          addLog(e.key as GameInputs, false, elapsedTime)
+          addLog(e.key as GameInputs, false, elapsedTime, 'letter')
           setTimeout(() => {
             setLetterViewState(KeyTileViewState.DEFAULT)
             setIsLetterInputDisabled(false)
