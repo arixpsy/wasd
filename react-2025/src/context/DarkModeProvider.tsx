@@ -1,14 +1,36 @@
-import { type PropsWithChildren, useEffect } from 'react'
+import { type PropsWithChildren, useEffect, useState } from 'react'
 import DarkModeContext from '@/context/useDarkMode'
 import {
-  enableDarkMode,
-  disableDarkMode,
-  resetTheme,
-  toggleDarkMode,
+  enableDarkMode as enable,
+  disableDarkMode as disable,
+  resetTheme as reset,
+  toggleDarkMode as toggle,
   setDarkMode,
 } from '@/utils/functions/darkMode'
 
 const DarkModeProvider = ({ children }: PropsWithChildren) => {
+  const [toggleCount, setToggleCount] = useState(0)
+
+  const enableDarkMode = () => {
+    enable()
+    setToggleCount((c) => c + 1)
+  }
+
+  const disableDarkMode = () => {
+    disable()
+    setToggleCount((c) => c + 1)
+  }
+
+  const resetTheme = () => {
+    reset()
+    setToggleCount((c) => c + 1)
+  }
+
+  const toggleDarkMode = () => {
+    toggle()
+    setToggleCount((c) => c + 1)
+  }
+
   useEffect(() => {
     setDarkMode()
   }, [])
@@ -20,6 +42,7 @@ const DarkModeProvider = ({ children }: PropsWithChildren) => {
         disableDarkMode,
         toggleDarkMode,
         resetTheme,
+        toggleCount,
       }}
     >
       {children}

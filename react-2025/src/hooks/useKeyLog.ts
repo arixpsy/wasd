@@ -1,7 +1,7 @@
 import type { GameInputs } from '@/utils/constants/enums'
 import { useState } from 'react'
 
-type Log = {
+export type Log = {
   correct: boolean
   key: GameInputs
   timePressed: number

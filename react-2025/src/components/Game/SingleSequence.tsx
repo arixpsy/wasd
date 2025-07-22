@@ -6,6 +6,7 @@ import Results from '@/components/Results'
 import GameConfigContext from '@/context/useGameConfig'
 import useSingleSequenceGame from '@/hooks/useSingleSequenceGame'
 import { GameState } from '@/utils/constants/enums'
+import StatsChart from '@/components/StatsChart'
 
 const SingleSequence = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -41,7 +42,7 @@ const SingleSequence = () => {
       <div className='relative grid h-full place-items-center'>
         <Results logs={keylogs} />
 
-        {/* TODO: add chartjs */}
+        <StatsChart data={keylogs} type='single' />
 
         <ResetGameButton onClick={resetGame} className='relative z-10 mt-10' />
       </div>

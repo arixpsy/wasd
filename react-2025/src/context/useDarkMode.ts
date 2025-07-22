@@ -11,6 +11,7 @@ type DarkModeContext = {
   disableDarkMode: () => void
   toggleDarkMode: () => void
   resetTheme: () => void
+  toggleCount: number
 }
 
 const DarkModeContext = createContext<DarkModeContext>({
@@ -18,6 +19,7 @@ const DarkModeContext = createContext<DarkModeContext>({
   disableDarkMode,
   toggleDarkMode,
   resetTheme,
+  toggleCount: 0,
 })
 
 export default DarkModeContext

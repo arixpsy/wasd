@@ -6,6 +6,7 @@ import useSplitSequenceGame from '@/hooks/useSplitSequenceGame'
 import GameConfigContext from '@/context/useGameConfig'
 import { GameState } from '@/utils/constants/enums'
 import Results from '@/components/Results'
+import StatsChart from '@/components/StatsChart'
 
 const SplitSequence = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -38,7 +39,7 @@ const SplitSequence = () => {
       <div className='relative grid h-full place-items-center'>
         <Results logs={keylogs} />
 
-        {/* TODO: add chartjs */}
+        <StatsChart data={keylogs} />
 
         <ResetGameButton onClick={resetGame} className='relative z-10 mt-10' />
       </div>
