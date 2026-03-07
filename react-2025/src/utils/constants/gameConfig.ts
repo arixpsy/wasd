@@ -16,7 +16,4 @@ export const GAME_CONFIG_OPTIONS: Record<
   [GameMode.SPLIT_SEQUENCE]: {
     [ConfigOption.NUMBER_OF_KEYS]: [10, 15, 20],
   },
-  [GameMode.EIGHT_SPLIT]: {
-    [ConfigOption.NUMBER_OF_KEYS]: [20, 25, 30],
-  },
 }

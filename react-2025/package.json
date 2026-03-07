@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-router": "^1.120.15",
     "@tanstack/react-router-devtools": "^1.120.15",
+    "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
     "howler": "^2.2.4",
     "motion": "^12.16.0",

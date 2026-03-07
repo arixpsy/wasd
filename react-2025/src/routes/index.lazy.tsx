@@ -16,8 +16,6 @@ const Index = () => {
 
   const renderGame = useMemo(() => {
     switch (gameMode) {
-      case 'eight split':
-        return <></>
       case 'split sequence':
         return <Game.Split key={gameMode + keys} />
       default:

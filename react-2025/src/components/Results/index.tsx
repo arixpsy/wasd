@@ -1,7 +1,10 @@
+import StatsChart from './StatsChart'
+
 type ResultsProps = {
   logs: Array<{
     correct: boolean
     timePressed: number
+    type?: 'arrow' | 'letter'
   }>
 }
 
@@ -17,30 +20,34 @@ const Results = ({ logs }: ResultsProps) => {
   const apm = (60 / (endTime / 1000)) * correctInput.length
 
   return (
-    <div className='flex justify-around'>
-      <div className='flex w-[150px] flex-col items-center'>
-        <p title='Total Time Taken in Seconds'>Time Taken(s)</p>
-        <div className='border-t-key1 mt-4 border-16 border-transparent' />
-        <p>{(endTime / 1000).toFixed(2)}</p>
+    <div className='flex flex-col gap-4'>
+      <div className='flex justify-around'>
+        <div className='flex w-[150px] flex-col items-center'>
+          <p title='Total Time Taken in Seconds'>Time Taken(s)</p>
+          <div className='border-t-key1 mt-4 border-16 border-transparent' />
+          <p>{(endTime / 1000).toFixed(2)}</p>
+        </div>
+
+        <div className='flex w-[150px] flex-col items-center'>
+          <p title='Accuracy'>Accuracy</p>
+          <div className='border-t-key2 mt-4 border-16 border-transparent' />
+          <p>{accuracy.toFixed(2)}%</p>
+        </div>
+
+        <div className='flex w-[150px] flex-col items-center'>
+          <p title='Actions Per Minute'>APM</p>
+          <div className='border-t-key3 mt-4 border-16 border-transparent' />
+          <p>{apm.toFixed(0)}</p>
+        </div>
+
+        <div className='flex w-[150px] flex-col items-center'>
+          <p title='Total Number of Incorrect Inputs'>Errors</p>
+          <div className='border-t-key4 mt-4 border-16 border-transparent' />
+          <p>{errors}</p>
+        </div>
       </div>
 
-      <div className='flex w-[150px] flex-col items-center'>
-        <p title='Accuracy'>Accuracy</p>
-        <div className='border-t-key2 mt-4 border-16 border-transparent' />
-        <p>{accuracy.toFixed(2)}%</p>
-      </div>
-
-      <div className='flex w-[150px] flex-col items-center'>
-        <p title='Actions Per Minute'>APM</p>
-        <div className='border-t-key3 mt-4 border-16 border-transparent' />
-        <p>{apm.toFixed(0)}</p>
-      </div>
-
-      <div className='flex w-[150px] flex-col items-center'>
-        <p title='Total Number of Incorrect Inputs'>Errors</p>
-        <div className='border-t-key4 mt-4 border-16 border-transparent' />
-        <p>{errors}</p>
-      </div>
+      <StatsChart logs={logs} />
     </div>
   )
 }

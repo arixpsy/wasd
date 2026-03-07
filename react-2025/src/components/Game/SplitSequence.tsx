@@ -35,10 +35,8 @@ const SplitSequence = () => {
 
   if (gameState === GameState.COMPLETED)
     return (
-      <div className='relative grid h-full place-items-center'>
+      <div className='relative flex h-full flex-col items-center justify-center gap-3'>
         <Results logs={keylogs} />
-
-        {/* TODO: add chartjs */}
 
         <ResetGameButton onClick={resetGame} className='relative z-10 mt-10' />
       </div>

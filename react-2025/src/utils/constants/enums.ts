@@ -1,7 +1,6 @@
 export const GameMode = {
   SINGLE_SEQUENCES: 'single sequences',
   SPLIT_SEQUENCE: 'split sequence',
-  EIGHT_SPLIT: 'eight split',
 } as const
 
 export type GameMode = (typeof GameMode)[keyof typeof GameMode]
